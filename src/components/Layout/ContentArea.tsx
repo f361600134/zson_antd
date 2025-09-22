@@ -11,6 +11,7 @@ import PersonalProfile from '../Profile/PersonalProfile';
 import AdminPanel from '../Admin/AdminPanel';
 import TeamManagement from '../Team/TeamManagement';
 import type { NavigationPage } from '../../types';
+import Placeholder from "../Common/Placeholder.tsx";
 
 const { Content } = Layout;
 
@@ -20,29 +21,7 @@ interface ContentAreaProps {
 }
 
 const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
-  const { layoutStyles, themeConfig } = useThemeStyles();
-
-  const placeholderStyle: React.CSSProperties = {
-    textAlign: 'center',
-    padding: '80px 0',
-    position: 'relative',
-    zIndex: 10
-  };
-
-  const placeholderIconStyle: React.CSSProperties = {
-    fontSize: '48px',
-    marginBottom: '16px',
-    color: themeConfig.themeMode === 'dark' ? '#434343' : '#d1d5db'
-  };
-
-  const placeholderTitleStyle: React.CSSProperties = {
-    fontSize: '20px',
-    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280'
-  };
-
-  const placeholderTextStyle: React.CSSProperties = {
-    color: themeConfig.themeMode === 'dark' ? '#595959' : '#9ca3af'
-  };
+  const { layoutStyles } = useThemeStyles();
 
   // 主内容样式，确保在装饰元素之上
   const mainContentStyle: React.CSSProperties = {
@@ -64,29 +43,17 @@ const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
       case 'team':
         return <TeamManagement />;
       case 'documents':
-        return (
-          <div style={placeholderStyle}>
-            <FileTextOutlined style={placeholderIconStyle} />
-            <h3 style={placeholderTitleStyle}>
-              Documents Page
-            </h3>
-            <p style={placeholderTextStyle}>
-              This page is under development
-            </p>
-          </div>
-        );
+        return <Placeholder
+            icon={<FileTextOutlined />}
+            title="Documents Page"
+            text="This page is under development"
+        />;
       case 'analytics':
-        return (
-          <div style={placeholderStyle}>
-            <BarChartOutlined style={placeholderIconStyle} />
-            <h3 style={placeholderTitleStyle}>
-              Analytics Page
-            </h3>
-            <p style={placeholderTextStyle}>
-              This page is under development
-            </p>
-          </div>
-        );
+        return <Placeholder
+            icon={<BarChartOutlined />}
+            title="Analytics Page"
+            text="This page is under development"
+        />;
       default:
         return <Dashboard />;
     }
