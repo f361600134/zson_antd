@@ -4,13 +4,14 @@ import {
   FileTextOutlined,
   BarChartOutlined
 } from '@ant-design/icons';
-import { useThemeStyles } from '../../hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import SystemSettings from '../Settings/SystemSettings';
 import PersonalProfile from '../Profile/PersonalProfile';
 import AdminPanel from '../Admin/AdminPanel';
 import TeamManagement from '../Team/TeamManagement';
-import type { NavigationPage } from '../../types';
+import {NavigationPage} from "../../types";
+import {useThemeStyles} from "../../hooks";
+import Placeholder from "../Common/Placeholder.tsx";
 const { Content } = Layout;
 
 interface ContentAreaProps {
@@ -20,26 +21,6 @@ interface ContentAreaProps {
 
 const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
   const { layoutStyles, themeConfig } = useThemeStyles();
-
-  const placeholderStyle: React.CSSProperties = {
-    textAlign: 'center',
-    padding: '80px 0'
-  };
-
-  const placeholderIconStyle: React.CSSProperties = {
-    fontSize: '48px',
-    marginBottom: '16px',
-    color: themeConfig.themeMode === 'dark' ? '#434343' : '#d1d5db'
-  };
-
-  const placeholderTitleStyle: React.CSSProperties = {
-    fontSize: '20px',
-    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280'
-  };
-
-  const placeholderTextStyle: React.CSSProperties = {
-    color: themeConfig.themeMode === 'dark' ? '#595959' : '#9ca3af'
-  };
 
   // 渲染主题背景装饰
   const renderThemeDecorations = () => {
@@ -55,7 +36,7 @@ const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
         </>
       );
     }
-    
+
     if (themeConfig.presetTheme === 'colorful') {
       return (
         <>
@@ -65,6 +46,21 @@ const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
             <div className="floating-element element-2">◆</div>
             <div className="floating-element element-3">✧</div>
             <div className="floating-accent">◇</div>
+          </div>
+        </>
+      );
+    }
+
+    if (themeConfig.presetTheme === 'luxury') {
+      return (
+        <>
+          <div className="luxury-bg-pattern" />
+          <div className="luxury-floating-elements">
+            <div className="floating-diamond diamond-1">◆</div>
+            <div className="floating-diamond diamond-2">◇</div>
+            <div className="floating-diamond diamond-3">◈</div>
+            <div className="floating-crown">♔</div>
+            <div className="floating-star">★</div>
           </div>
         </>
       );
@@ -86,29 +82,17 @@ const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
       case 'team':
         return <TeamManagement />;
       case 'documents':
-        return (
-          <div style={placeholderStyle}>
-            <FileTextOutlined style={placeholderIconStyle} />
-            <h3 style={placeholderTitleStyle}>
-              Documents Page
-            </h3>
-            <p style={placeholderTextStyle}>
-              This page is under development
-            </p>
-          </div>
-        );
+        return <Placeholder
+            icon={<FileTextOutlined />}
+            title="Documents Page"
+            text="This page is under development"
+        />;
       case 'analytics':
-        return (
-          <div style={placeholderStyle}>
-            <BarChartOutlined style={placeholderIconStyle} />
-            <h3 style={placeholderTitleStyle}>
-              Analytics Page
-            </h3>
-            <p style={placeholderTextStyle}>
-              This page is under development
-            </p>
-          </div>
-        );
+        return <Placeholder
+            icon={<BarChartOutlined />}
+            title="Analytics Page"
+            text="This page is under development"
+        />;
       default:
         return <Dashboard />;
     }

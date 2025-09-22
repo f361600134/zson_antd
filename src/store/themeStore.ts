@@ -6,7 +6,7 @@ export interface ThemeConfig {
   borderRadius: number;
   compactMode: boolean;
   themeMode: 'light' | 'dark';
-  presetTheme: 'default' | 'dark' | 'compact' | 'colorful';
+  presetTheme: 'default' | 'dark' | 'compact' | 'colorful' | 'luxury';
   language: 'zh-CN' | 'en-US' | 'ja-JP' | 'ko-KR';
   allowUserRegistration: boolean;
   defaultUserStatus: 'active' | 'inactive' | 'pending';
@@ -71,6 +71,16 @@ const presetThemes = {
     allowUserRegistration: true,
     defaultUserStatus: 'inactive' as const
   },
+  luxury: {
+    colorPrimary: '#FFD700',
+    borderRadius: 4,
+    compactMode: false,
+    themeMode: 'dark' as const,
+    presetTheme: 'luxury' as const,
+    language: 'zh-CN' as const,
+    allowUserRegistration: true,
+    defaultUserStatus: 'inactive' as const
+  }
 };
 
 export const useThemeStore = create<ThemeState>()(

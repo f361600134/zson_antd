@@ -27,6 +27,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   const { currentWorkspace } = useWorkspaceStore();
   const { layoutStyles, themeConfig } = useThemeStyles();
 
+  //Header中的用户头像
   const adminMenuItems: MenuProps['items'] = [
     {
       key: 'profile',

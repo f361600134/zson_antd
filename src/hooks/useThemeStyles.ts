@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useThemeStore } from '../store/themeStore';
 
 export const useThemeStyles = () => {
@@ -21,6 +21,11 @@ export const useThemeStyles = () => {
         background: 'linear-gradient(180deg, #FAF9F7 0%, #F5F3F0 100%)',
         borderRight: '1px solid #E7E5E4'
       }),
+      ...(themeConfig.presetTheme === 'luxury' && {
+        background: 'linear-gradient(180deg, #1F1F1F 0%, #121212 100%)',
+        borderRight: '1px solid #333333',
+        boxShadow: 'inset 1px 0 0 rgba(255, 215, 0, 0.1)'
+      })
     } as React.CSSProperties,
 
     header: {
@@ -37,9 +42,15 @@ export const useThemeStyles = () => {
         borderBottom: '1px solid #E7E5E4',
         boxShadow: '0 2px 8px rgba(139, 90, 107, 0.06)'
       }),
+      ...(themeConfig.presetTheme === 'luxury' && {
+        background: 'linear-gradient(135deg, #1F1F1F 0%, #2A2A2A 50%, #1A1A1A 100%)',
+        borderBottom: '1px solid #333333',
+        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.1)'
+      })
     } as React.CSSProperties,
 
     content: {
+      position: 'relative',
       backgroundColor: themeConfig.themeMode === 'dark' ? '#000000' : '#f5f5f5',
       padding: '24px',
       ...(themeConfig.presetTheme === 'compact' && {
@@ -50,8 +61,28 @@ export const useThemeStyles = () => {
         background: 'linear-gradient(135deg, #FAF9F7 0%, #F5F3F0 100%)',
         position: 'relative'
       }),
+      ...(themeConfig.presetTheme === 'luxury' && {
+        background: 'linear-gradient(135deg, #121212 0%, #1A1A1A 100%)',
+        position: 'relative'
+      })
     } as React.CSSProperties
   }), [themeConfig]);
+
+  const textStyles = {
+    title: {
+      fontSize: '18px',
+      fontWeight: 600,
+      margin: 0,
+      color: themeConfig.themeMode === 'dark' ? '#ffffff' : '#1f2937'
+    },
+    description: {
+      fontSize: '14px',
+      margin: 0,
+      lineHeight: '18px',
+      color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#4b5563'
+    },
+    // 其他通用文本样式
+  };
 
   return {
     layoutStyles,

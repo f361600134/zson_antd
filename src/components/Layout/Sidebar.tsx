@@ -2,15 +2,13 @@ import React from 'react';
 import { Layout, Menu, Select, Typography, Button, Flex } from 'antd';
 import {
   DashboardOutlined,
-  FileTextOutlined,
-  TeamOutlined,
-  BarChartOutlined,
   DownOutlined
 } from '@ant-design/icons';
 import { useWorkspaceStore } from '../../store/workspaceStore';
-import { useThemeStyles } from '../../hooks/useThemeStyles';
+import { useThemeStyles } from '../../hooks';
 import type { MenuProps } from 'antd';
-import type { NavigationPage } from '../../types/navigation';
+import type { NavigationPage } from '../../types';
+import {sidebarNavigationItems} from "./NavigationItems.tsx";
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -25,32 +23,12 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, currentPage, onNavigate })
   const { currentWorkspace, workspaces, setCurrentWorkspace } = useWorkspaceStore();
   const { layoutStyles, themeConfig } = useThemeStyles();
 
-  const sidebarMenuItems: MenuProps['items'] = [
-    {
-      key: 'dashboard',
-      icon: <DashboardOutlined />,
-      label: 'Dashboard',
-      onClick: () => onNavigate('dashboard')
-    },
-    {
-      key: 'documents',
-      icon: <FileTextOutlined />,
-      label: 'Documents',
-      onClick: () => onNavigate('documents')
-    },
-    {
-      key: 'team',
-      icon: <TeamOutlined />,
-      label: 'Team Management',
-      onClick: () => onNavigate('team')
-    },
-    {
-      key: 'analytics',
-      icon: <BarChartOutlined />,
-      label: 'Analytics',
-      onClick: () => onNavigate('analytics')
-    }
-  ];
+  const sidebarMenuItems: MenuProps['items'] = sidebarNavigationItems.map(item => ({
+    key: item.key,
+    icon: item.icon,
+    label: item.label,
+    onClick: () => onNavigate(item.key as NavigationPage)
+  }));
 
   const workspaceOptions = workspaces.map(workspace => ({
     label: (

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ConfigProvider, theme } from 'antd';
 import AppLayout from './components/Layout/AppLayout';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -83,12 +82,12 @@ function App() {
     }
   };
 
-  if (themeConfig.compactMode) {
-    antdTheme.algorithm = [
-      themeConfig.themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
-      theme.compactAlgorithm
-    ];
-  }
+  // if (themeConfig.compactMode) {
+  //   antdTheme.algorithm = [
+  //     themeConfig.themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+  //     theme.compactAlgorithm
+  //   ];
+  // }
 
   return (
     <ConfigProvider
