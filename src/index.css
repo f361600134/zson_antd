@@ -140,11 +140,11 @@ code {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(27, 77, 62, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(156, 163, 175, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 40% 60%, rgba(241, 243, 244, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(27, 77, 62, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(156, 163, 175, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(241, 243, 244, 0.06) 0%, transparent 50%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .knowledge-floating-icons {
@@ -154,37 +154,40 @@ code {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .floating-book {
   position: absolute;
   top: 10%;
   right: 15%;
-  font-size: 24px;
-  opacity: 0.06;
+  font-size: 32px;
+  opacity: 0.15;
   color: #1B4D3E;
   animation: float-knowledge 6s ease-in-out infinite;
+  z-index: 1;
 }
 
 .floating-lightbulb {
   position: absolute;
   top: 60%;
   right: 5%;
-  font-size: 20px;
-  opacity: 0.05;
+  font-size: 28px;
+  opacity: 0.12;
   color: #9CA3AF;
   animation: float-knowledge 8s ease-in-out infinite reverse;
+  z-index: 1;
 }
 
 .floating-tree {
   position: absolute;
   bottom: 20%;
   left: 10%;
-  font-size: 28px;
-  opacity: 0.04;
+  font-size: 36px;
+  opacity: 0.1;
   color: #1B4D3E;
   animation: float-knowledge 10s ease-in-out infinite;
+  z-index: 1;
 }
 
 @keyframes float-knowledge {
@@ -200,11 +203,11 @@ code {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(139, 90, 107, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(168, 162, 158, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(245, 243, 240, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 25% 25%, rgba(139, 90, 107, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(168, 162, 158, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(245, 243, 240, 0.06) 0%, transparent 50%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .elegant-floating-elements {
@@ -214,14 +217,15 @@ code {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .floating-element {
   position: absolute;
-  font-size: 18px;
-  opacity: 0.06;
+  font-size: 24px;
+  opacity: 0.12;
   color: #8B5A6B;
+  z-index: 1;
 }
 
 .element-1 {
@@ -246,10 +250,11 @@ code {
   position: absolute;
   top: 70%;
   right: 10%;
-  font-size: 14px;
-  opacity: 0.05;
+  font-size: 18px;
+  opacity: 0.1;
   color: #A8A29E;
   animation: pulse-elegant 6s ease-in-out infinite;
+  z-index: 1;
 }
 
 @keyframes float-elegant {
@@ -271,11 +276,11 @@ code {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 40% 60%, rgba(31, 31, 31, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(31, 31, 31, 0.06) 0%, transparent 50%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .luxury-floating-elements {
@@ -285,15 +290,16 @@ code {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .floating-diamond {
   position: absolute;
-  font-size: 20px;
+  font-size: 28px;
   color: #FFD700;
-  opacity: 0.08;
+  opacity: 0.15;
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+  z-index: 1;
 }
 
 .diamond-1 {
@@ -318,22 +324,24 @@ code {
   position: absolute;
   top: 30%;
   left: 10%;
-  font-size: 24px;
+  font-size: 32px;
   color: #D4AF37;
-  opacity: 0.06;
+  opacity: 0.12;
   animation: pulse-luxury 6s ease-in-out infinite;
   filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
+  z-index: 1;
 }
 
 .floating-star {
   position: absolute;
   bottom: 40%;
   right: 25%;
-  font-size: 16px;
+  font-size: 24px;
   color: #FFD700;
-  opacity: 0.07;
+  opacity: 0.14;
   animation: twinkle-luxury 4s ease-in-out infinite;
   filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.5));
+  z-index: 1;
 }
 
 @keyframes float-luxury {

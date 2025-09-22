@@ -4,14 +4,14 @@ import {
   FileTextOutlined,
   BarChartOutlined
 } from '@ant-design/icons';
+import { useThemeStyles } from '../../hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import SystemSettings from '../Settings/SystemSettings';
 import PersonalProfile from '../Profile/PersonalProfile';
 import AdminPanel from '../Admin/AdminPanel';
 import TeamManagement from '../Team/TeamManagement';
-import {NavigationPage} from "../../types";
-import {useThemeStyles} from "../../hooks";
-import Placeholder from "../Common/Placeholder.tsx";
+import type { NavigationPage } from '../../types';
+
 const { Content } = Layout;
 
 interface ContentAreaProps {
@@ -22,50 +22,32 @@ interface ContentAreaProps {
 const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
   const { layoutStyles, themeConfig } = useThemeStyles();
 
-  // 渲染主题背景装饰
-  const renderThemeDecorations = () => {
-    if (themeConfig.presetTheme === 'compact') {
-      return (
-        <>
-          <div className="knowledge-bg-pattern" />
-          <div className="knowledge-floating-icons">
-            <div className="floating-book">📚</div>
-            <div className="floating-lightbulb">💡</div>
-            <div className="floating-tree">🌱</div>
-          </div>
-        </>
-      );
-    }
+  const placeholderStyle: React.CSSProperties = {
+    textAlign: 'center',
+    padding: '80px 0',
+    position: 'relative',
+    zIndex: 10
+  };
 
-    if (themeConfig.presetTheme === 'colorful') {
-      return (
-        <>
-          <div className="elegant-bg-pattern" />
-          <div className="elegant-floating-elements">
-            <div className="floating-element element-1">✦</div>
-            <div className="floating-element element-2">◆</div>
-            <div className="floating-element element-3">✧</div>
-            <div className="floating-accent">◇</div>
-          </div>
-        </>
-      );
-    }
+  const placeholderIconStyle: React.CSSProperties = {
+    fontSize: '48px',
+    marginBottom: '16px',
+    color: themeConfig.themeMode === 'dark' ? '#434343' : '#d1d5db'
+  };
 
-    if (themeConfig.presetTheme === 'luxury') {
-      return (
-        <>
-          <div className="luxury-bg-pattern" />
-          <div className="luxury-floating-elements">
-            <div className="floating-diamond diamond-1">◆</div>
-            <div className="floating-diamond diamond-2">◇</div>
-            <div className="floating-diamond diamond-3">◈</div>
-            <div className="floating-crown">♔</div>
-            <div className="floating-star">★</div>
-          </div>
-        </>
-      );
-    }
-    return null;
+  const placeholderTitleStyle: React.CSSProperties = {
+    fontSize: '20px',
+    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280'
+  };
+
+  const placeholderTextStyle: React.CSSProperties = {
+    color: themeConfig.themeMode === 'dark' ? '#595959' : '#9ca3af'
+  };
+
+  // 主内容样式，确保在装饰元素之上
+  const mainContentStyle: React.CSSProperties = {
+    position: 'relative',
+    zIndex: 10
   };
 
   // 渲染页面内容
@@ -82,17 +64,29 @@ const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
       case 'team':
         return <TeamManagement />;
       case 'documents':
-        return <Placeholder
-            icon={<FileTextOutlined />}
-            title="Documents Page"
-            text="This page is under development"
-        />;
+        return (
+          <div style={placeholderStyle}>
+            <FileTextOutlined style={placeholderIconStyle} />
+            <h3 style={placeholderTitleStyle}>
+              Documents Page
+            </h3>
+            <p style={placeholderTextStyle}>
+              This page is under development
+            </p>
+          </div>
+        );
       case 'analytics':
-        return <Placeholder
-            icon={<BarChartOutlined />}
-            title="Analytics Page"
-            text="This page is under development"
-        />;
+        return (
+          <div style={placeholderStyle}>
+            <BarChartOutlined style={placeholderIconStyle} />
+            <h3 style={placeholderTitleStyle}>
+              Analytics Page
+            </h3>
+            <p style={placeholderTextStyle}>
+              This page is under development
+            </p>
+          </div>
+        );
       default:
         return <Dashboard />;
     }
@@ -100,8 +94,10 @@ const ContentArea: React.FC<ContentAreaProps> = ({ currentPage, children }) => {
 
   return (
     <Content style={layoutStyles.content}>
-      {renderThemeDecorations()}
-      {renderPageContent()}
+      {/* 主要内容 - 在前景层 */}
+      <div style={mainContentStyle}>
+        {renderPageContent()}
+      </div>
     </Content>
   );
 };
