@@ -1,16 +1,16 @@
 import React from 'react';
-import { Layout, Dropdown, Avatar, Typography, Space, Flex, Button } from 'antd';
+import { Layout, Dropdown, Typography, Space, Flex, Button } from 'antd';
 import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
-  DownOutlined,
   MenuOutlined
 } from '@ant-design/icons';
 import { useWorkspaceStore } from '../../store/workspaceStore';
 import { useThemeStyles } from '../../hooks';
 import type { MenuProps } from 'antd';
 import type { NavigationPage } from '../../types';
+import UserAvatar from "../Common/UserAvatar.tsx";
 
 const { Header } = Layout;
 
@@ -106,38 +106,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
         >
           <div className="admin-dropdown-trigger">
             <Space size={12} align="center">
-              <Avatar 
-                size="default" 
-                icon={<UserOutlined />}
-                style={{ backgroundColor: '#1677ff' }}
-              />
-              <div style={{ textAlign: 'left' }}>
-                <Typography.Text 
-                  style={{ 
-                    fontWeight: 500,
-                    color: themeConfig.themeMode === 'dark' ? '#ffffff' : '#1f2937',
-                    display: 'block',
-                    lineHeight: '20px',
-                    marginBottom: '2px'
-                  }}
-                >
-                  Admin User
-                </Typography.Text>
-                <Typography.Text 
-                  style={{ 
-                    fontSize: '12px',
-                    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280',
-                    display: 'block',
-                    lineHeight: '16px',
-                    marginTop: 0
-                  }}
-                >
-                  admin@company.com
-                </Typography.Text>
-              </div>
-              <DownOutlined 
-                style={{ color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#9ca3af' }}
-              />
+              <UserAvatar name='Admin User' email = 'admin@company.com' />
             </Space>
           </div>
         </Dropdown>
