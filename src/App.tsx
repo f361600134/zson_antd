@@ -82,12 +82,12 @@ function App() {
     }
   };
 
-  // if (themeConfig.compactMode) {
-  //   antdTheme.algorithm = [
-  //     themeConfig.themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
-  //     theme.compactAlgorithm
-  //   ];
-  // }
+  if (themeConfig.compactMode) {
+    antdTheme.algorithm = [
+      themeConfig.themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      theme.compactAlgorithm
+    ];
+  }
 
   return (
     <ConfigProvider
