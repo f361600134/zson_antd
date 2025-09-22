@@ -266,37 +266,6 @@ const AdminPanel: React.FC = () => {
     form.resetFields();
   };
 
-  const titleStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 600,
-    marginBottom: '8px',
-    color: themeConfig.themeMode === 'dark' ? '#ffffff' : '#1f2937'
-  };
-
-  const subtitleStyle: React.CSSProperties = {
-    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280',
-    marginBottom: '24px'
-  };
-
-  const cardStyle: React.CSSProperties = {
-    marginBottom: '24px',
-    ...(themeConfig.presetTheme === 'compact' && {
-      background: 'linear-gradient(135deg, #FEFEFE 0%, #F8F9FA 100%)',
-      border: '1px solid #E5E7EB',
-      boxShadow: '0 4px 12px rgba(27, 77, 62, 0.08)'
-    }),
-    ...(themeConfig.presetTheme === 'colorful' && {
-      background: 'linear-gradient(135deg, #FAF9F7 0%, #F5F3F0 100%)',
-      border: '1px solid #E7E5E4',
-      boxShadow: '0 4px 12px rgba(139, 90, 107, 0.08)'
-    }),
-    ...(themeConfig.presetTheme === 'luxury' && {
-      background: 'linear-gradient(135deg, #1F1F1F 0%, #2A2A2A 100%)',
-      border: '1px solid #333333',
-      boxShadow: '0 8px 32px rgba(255, 215, 0, 0.15)'
-    })
-  };
-
   return (
     <div>
       
