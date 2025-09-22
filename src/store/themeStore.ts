@@ -71,16 +71,6 @@ const presetThemes = {
     allowUserRegistration: true,
     defaultUserStatus: 'inactive' as const
   },
-  luxury: {
-    colorPrimary: '#FFD700',
-    borderRadius: 4,
-    compactMode: false,
-    themeMode: 'dark' as const,
-    presetTheme: 'luxury' as const,
-    language: 'zh-CN' as const,
-    allowUserRegistration: true,
-    defaultUserStatus: 'inactive' as const
-  }
 };
 
 export const useThemeStore = create<ThemeState>()(
