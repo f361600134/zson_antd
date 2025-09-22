@@ -4,14 +4,13 @@ import {
   FileTextOutlined,
   BarChartOutlined
 } from '@ant-design/icons';
-import { useThemeStyles } from '../../hooks/useThemeStyles';
+import { useThemeStyles } from '../../hooks';
 import Dashboard from '../Dashboard/Dashboard';
 import SystemSettings from '../Settings/SystemSettings';
 import PersonalProfile from '../Profile/PersonalProfile';
 import AdminPanel from '../Admin/AdminPanel';
 import TeamManagement from '../Team/TeamManagement';
-import type { NavigationPage } from '../../types/navigation';
-
+import type { NavigationPage } from '../../types';
 const { Content } = Layout;
 
 interface ContentAreaProps {

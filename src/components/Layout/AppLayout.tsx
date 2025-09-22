@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
-import { useNavigation } from '../../hooks/useNavigation';
-import { useThemeStyles } from '../../hooks/useThemeStyles';
+import { useNavigation, useThemeStyles } from '../../hooks';
 import Sidebar from './Sidebar';
 import AppHeader from './AppHeader';
 import ContentArea from './ContentArea';
