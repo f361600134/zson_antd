@@ -4,35 +4,24 @@ import { GlobalOutlined } from '@ant-design/icons';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
 import { LANGUAGE_OPTIONS, THEME_CONFIG } from '../../../config/settings';
+import {useSettingsStyles} from "../../../hooks";
 
 const { Text } = Typography;
 
 const LanguageSettings: React.FC = () => {
   const { themeConfig, setThemeConfig } = useThemeStore();
   const { t } = useTranslation(themeConfig.language);
-
-  const labelStyle: React.CSSProperties = {
-    fontSize: '18px',
-    fontWeight: 500,
-    marginBottom: '16px',
-    color: themeConfig.themeMode === 'dark' ? '#ffffff' : '#1f2937'
-  };
-
-  const descriptionStyle: React.CSSProperties = {
-    fontSize: '12px',
-    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#666'
-  };
+  const styles = useSettingsStyles();
 
   return (
     <div style={{ marginBottom: '24px' }}>
-      <Text style={labelStyle}>
-        <GlobalOutlined style={{ marginRight: '8px' }} />
-        {t('languageSettings')}
-      </Text>
-      
-      <div style={{ marginBottom: '12px' }}>
         <Flex justify="space-between" align="center">
-          <Select
+            <Text style={styles.label}>
+                <GlobalOutlined style={{ marginRight: '8px' }} />
+                {t('languageSettings')}
+            </Text>
+
+            <Select
             value={themeConfig.language}
             onChange={(value) => setThemeConfig({ language: value })}
             style={{ width: THEME_CONFIG.LANGUAGE_SELECT_WIDTH }}
@@ -44,9 +33,8 @@ const LanguageSettings: React.FC = () => {
             ))}
           </Select>
         </Flex>
-      </div>
-      
-      <Text style={descriptionStyle}>
+
+      <Text style={styles.description}>
         {t('languageDescription')}
       </Text>
     </div>
