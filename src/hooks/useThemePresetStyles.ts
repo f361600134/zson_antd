@@ -9,16 +9,8 @@ export const useThemePresetStyles = () => {
 
   // 获取当前主色调
   const getCurrentPrimaryColor = () => {
-    switch (themeConfig.presetTheme) {
-      case 'compact':
-        return '#52c41a';
-      case 'colorful':
-        return '#eb2f96';
-      case 'luxury':
-        return '#FFD700';
-      default:
-        return themeConfig.colorPrimary;
-    }
+    // 直接返回用户设置的主色调，不再根据预设主题硬编码
+    return themeConfig.colorPrimary;
   };
 
   const primaryColor = getCurrentPrimaryColor();

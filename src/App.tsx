@@ -8,10 +8,13 @@ function App() {
 
   // 获取主题特定的颜色配置
   const getThemeColors = () => {
+    // 优先使用用户自定义的主色调，如果没有则使用预设主题的默认颜色
+    const primaryColor = themeConfig.colorPrimary;
+    
     switch (themeConfig.presetTheme) {
       case 'compact':
         return {
-          colorPrimary: '#52c41a',
+          colorPrimary: primaryColor, // 使用用户设置的颜色
           colorSuccess: '#52c41a',
           colorInfo: '#1890ff',
           colorWarning: '#faad14',
@@ -19,7 +22,7 @@ function App() {
         };
       case 'colorful':
         return {
-          colorPrimary: '#eb2f96',
+          colorPrimary: primaryColor, // 使用用户设置的颜色
           colorSuccess: '#52c41a',
           colorInfo: '#722ed1',
           colorWarning: '#faad14',
@@ -27,15 +30,15 @@ function App() {
         };
       case 'luxury':
         return {
-          colorPrimary: '#FFD700',
-          colorSuccess: '#D4AF37',
+          colorPrimary: primaryColor, // 使用用户设置的颜色
+          colorSuccess: '#52c41a',
           colorInfo: '#B8860B',
           colorWarning: '#DAA520',
-          colorError: '#CD853F',
+          colorError: '#ff4d4f',
         };
       default:
         return {
-          colorPrimary: themeConfig.colorPrimary,
+          colorPrimary: primaryColor, // 使用用户设置的颜色
           colorSuccess: '#52c41a',
           colorInfo: '#1890ff',
           colorWarning: '#faad14',
@@ -86,7 +89,7 @@ function App() {
     antdTheme.algorithm = [
       themeConfig.themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
       theme.compactAlgorithm
-    ];
+    ] as any; // 临时解决类型问题
   }
 
   return (
