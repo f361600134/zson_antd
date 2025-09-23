@@ -7,7 +7,6 @@ import { useSettingsStyles } from '../../../hooks';
 import ThemePresets from './ThemePresets';
 import ColorPicker from './ColorPicker';
 import ThemeControls from './ThemeControls';
-
 const { Text } = Typography;
 
 const ThemeSettings: React.FC = () => {
@@ -16,19 +15,18 @@ const ThemeSettings: React.FC = () => {
   const styles = useSettingsStyles();
 
   return (
-    <div style={styles.sectionContainer}>
-      <Text style={styles.sectionTitle}>
+    <div>
+      {/* 标题 */}
+      <Text style={styles.text.sectionTitle}>
         <SettingOutlined style={{ marginRight: '8px' }} />
         {t('themeSettings')}
       </Text>
       <div style={{ margin: '12px 0 20px 0' }} />
-      
+
       {/* 主题预设 */}
       <ThemePresets />
-      
       {/* 主色调选择 */}
       <ColorPicker />
-      
       {/* 主题控制 */}
       <ThemeControls />
     </div>

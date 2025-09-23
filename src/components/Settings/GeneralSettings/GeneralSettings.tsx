@@ -3,8 +3,8 @@ import { Typography } from 'antd';
 import { ControlOutlined } from '@ant-design/icons';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
+import {useSettingsStyles} from '../../../hooks';
 import UserSettings from './UserSettings';
-import {useSettingsStyles} from "../../../hooks";
 
 const { Text } = Typography;
 
@@ -12,17 +12,19 @@ const GeneralSettings: React.FC = () => {
   const { themeConfig } = useThemeStore();
   const { t } = useTranslation(themeConfig.language);
   const styles = useSettingsStyles();
-
   return (
-    <div style={{ marginBottom: '24px' }}>
-      <Text style={styles.label}>
+    // <div style={styles.container.section}>
+    <div>
+      {/* 标题 */}
+      <Text style={styles.text.sectionTitle}>
         <ControlOutlined style={{ marginRight: '8px' }} />
         {t('generalSettings')}
       </Text>
       
-      <div style={{ margin: '12px 0 20px 0' }} />
-      
-      <UserSettings />
+      {/* 用户设置 */}
+      <div style={styles.container.group}>
+        <UserSettings />
+      </div>
     </div>
   );
 };

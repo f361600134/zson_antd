@@ -16,12 +16,12 @@ const SettingItem: React.FC<Props> = ({label, control, description}) => {
     return (
         <div style={{ marginBottom: '24px' }}>
             <Flex justify="space-between" align="center">
-                <Text style={styles.label}>
+                <Text style={styles.text.label}>
                 {label}
                 </Text>
                 {control}
             </Flex>
-            <Text style={styles.description}>
+            <Text style={styles.text.description}>
             {description}
             </Text>
        </div>

@@ -3,6 +3,7 @@ import { Row, Col, Typography } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
+import { useThemePresetStyles } from '../../../hooks/useThemePresetStyles';
 import type { ThemePreset } from '../../../types';
 import {
   DefaultThemePreview,
@@ -17,6 +18,12 @@ const { Text } = Typography;
 const ThemePresets: React.FC = () => {
   const { themeConfig, applyPresetTheme } = useThemeStore();
   const { t } = useTranslation(themeConfig.language);
+  const {
+    styles,
+    getThemeCardStyle,
+    handleCardHover,
+    handleCardLeave,
+  } = useThemePresetStyles();
 
   const presetThemes: ThemePreset[] = [
     { 
@@ -60,73 +67,18 @@ const ThemePresets: React.FC = () => {
     applyPresetTheme(themeKey);
   };
 
-  // 获取当前主色调
-  const getCurrentPrimaryColor = () => {
-    switch (themeConfig.presetTheme) {
-      case 'compact':
-        return '#52c41a';
-      case 'colorful':
-        return '#eb2f96';
-      case 'luxury':
-        return '#FFD700';
-      default:
-        return themeConfig.colorPrimary;
-    }
-  };
-
-  const primaryColor = getCurrentPrimaryColor();
-
-  // 动态样式
-  const getCardStyle = (isSelected: boolean) => ({
-    cursor: 'pointer',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    border: `2px solid ${isSelected ? primaryColor : 'transparent'}`,
-    borderRadius: '8px',
-    padding: '12px',
-    textAlign: 'center' as const,
-    position: 'relative' as const,
-    overflow: 'hidden' as const,
-    boxShadow: isSelected ? `0 0 0 3px ${primaryColor}20` : 'none',
-    transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-  });
-
-  const getCheckIconStyle = () => ({
-    position: 'absolute' as const,
-    top: '4px',
-    right: '4px',
-    width: '16px',
-    height: '16px',
-    backgroundColor: primaryColor,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-    fontSize: '10px',
-  });
-
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div style={styles.container.presetGrid}>
       <Row gutter={16}>
         {presetThemes.map((theme) => {
           const isSelected = themeConfig.presetTheme === theme.key;
           return (
             <Col key={theme.key}>
               <div
-                style={getCardStyle(isSelected)}
+                style={getThemeCardStyle(isSelected)}
                 onClick={() => handlePresetSelect(theme.key)}
-                onMouseEnter={(e) => {
-                  if (!isSelected) {
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSelected) {
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }
-                }}
+                onMouseEnter={(e) => handleCardHover(e.currentTarget, isSelected)}
+                onMouseLeave={(e) => handleCardLeave(e.currentTarget, isSelected)}
               >
                 <div 
                   className="theme-preview-box"
@@ -134,17 +86,14 @@ const ThemePresets: React.FC = () => {
                 >
                   {theme.preview}
                 </div>
+                
                 {isSelected && (
-                  <div style={getCheckIconStyle()}>
+                  <div style={styles.checkIcon}>
                     <CheckOutlined />
                   </div>
                 )}
-                <Text style={{ 
-                  fontSize: '12px', 
-                  color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#666',
-                  display: 'block',
-                  marginTop: '4px'
-                }}>
+                
+                <Text style={styles.themeName}>
                   {theme.name}
                 </Text>
               </div>
