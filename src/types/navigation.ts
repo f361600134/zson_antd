@@ -7,7 +7,9 @@ export type NavigationPage =
   | 'admin' 
   | 'team' 
   | 'documents' 
-  | 'analytics';
+  | 'analytics'
+  | 'sheet'
+  | 'protocol';
 
 export interface NavigationState {
   currentPage: NavigationPage;

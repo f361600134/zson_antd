@@ -68,21 +68,21 @@ export const useThemeStyles = () => {
     } as React.CSSProperties
   }), [themeConfig]);
 
-  const textStyles = {
-    title: {
-      fontSize: '18px',
-      fontWeight: 600,
-      margin: 0,
-      color: themeConfig.themeMode === 'dark' ? '#ffffff' : '#1f2937'
-    },
-    description: {
-      fontSize: '14px',
-      margin: 0,
-      lineHeight: '18px',
-      color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#4b5563'
-    },
-    // 其他通用文本样式
-  };
+  // const textStyles = {
+  //   title: {
+  //     fontSize: '18px',
+  //     fontWeight: 600,
+  //     margin: 0,
+  //     color: themeConfig.themeMode === 'dark' ? '#ffffff' : '#1f2937'
+  //   },
+  //   description: {
+  //     fontSize: '14px',
+  //     margin: 0,
+  //     lineHeight: '18px',
+  //     color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#4b5563'
+  //   },
+  //   // 其他通用文本样式
+  // };
 
   return {
     layoutStyles,

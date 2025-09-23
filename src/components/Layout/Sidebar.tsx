@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Layout, Menu, Select, Typography, Button, Flex } from 'antd';
 import {
   DashboardOutlined,
@@ -6,9 +6,10 @@ import {
 } from '@ant-design/icons';
 import { useWorkspaceStore } from '../../store/workspaceStore';
 import { useThemeStyles } from '../../hooks';
+import { usePageRouter } from '../../hooks/usePageRouter';
 import type { MenuProps } from 'antd';
 import type { NavigationPage } from '../../types';
-import {sidebarNavigationItems} from "./NavigationItems.tsx";
+import { sidebarNavigationItems } from "./NavigationItems.tsx";
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -17,13 +18,33 @@ interface SidebarProps {
   collapsed: boolean;
   currentPage: NavigationPage;
   onNavigate: (page: NavigationPage) => void;
+  userRoles?: string[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ collapsed, currentPage, onNavigate }) => {
+const Sidebar: React.FC<SidebarProps> = ({ 
+  collapsed, 
+  currentPage, 
+  onNavigate,
+  userRoles = []
+}) => {
   const { currentWorkspace, workspaces, setCurrentWorkspace } = useWorkspaceStore();
   const { layoutStyles, themeConfig } = useThemeStyles();
+  const { canAccess } = usePageRouter({ userRoles });
 
-  const sidebarMenuItems: MenuProps['items'] = sidebarNavigationItems.map(item => ({
+  // 根据用户角色过滤菜单项
+  const filteredNavigationItems = useMemo(() => {
+    return sidebarNavigationItems.filter(item => {
+      // 如果菜单项定义了角色要求，检查用户是否有权限
+      if (item.roles && item.roles.length > 0) {
+        return item.roles.some(role => userRoles.includes(role));
+      }
+      
+      // 如果没有角色要求，检查对应页面的权限
+      return canAccess(item.key as NavigationPage);
+    });
+  }, [sidebarNavigationItems, userRoles, canAccess]);
+
+  const sidebarMenuItems: MenuProps['items'] = filteredNavigationItems.map(item => ({
     key: item.key,
     icon: item.icon,
     label: item.label,

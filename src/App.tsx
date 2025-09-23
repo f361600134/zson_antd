@@ -6,6 +6,9 @@ import { useThemeStore } from './store/themeStore';
 function App() {
   const { themeConfig } = useThemeStore();
 
+  // 模拟用户角色（在实际应用中，这应该来自认证系统）
+  const userRoles = ['user', 'admin']; // 可以根据实际登录用户动态设置
+
   // 获取主题特定的颜色配置
   const getThemeColors = () => {
     // 优先使用用户自定义的主色调，如果没有则使用预设主题的默认颜色
@@ -96,7 +99,7 @@ function App() {
     <ConfigProvider
       theme={antdTheme}
     >
-      <AppLayout>
+      <AppLayout userRoles={userRoles}>
         <Dashboard />
       </AppLayout>
     </ConfigProvider>
