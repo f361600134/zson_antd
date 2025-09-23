@@ -89,7 +89,7 @@ function App() {
     antdTheme.algorithm = [
       themeConfig.themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
       theme.compactAlgorithm
-    ] as any; // 临时解决类型问题
+    ] as never; // 临时解决类型问题
   }
 
   return (

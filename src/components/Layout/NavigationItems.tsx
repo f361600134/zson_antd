@@ -3,6 +3,7 @@ import {
     FileTextOutlined,
     TeamOutlined,
     BarChartOutlined,
+    FileExcelOutlined, FilePptOutlined,
 } from '@ant-design/icons';
 
 import {NavigationMenuItem} from "../../types/navigation.ts";
@@ -28,5 +29,15 @@ export const sidebarNavigationItems: NavigationMenuItem[] = [
         key: 'analytics',
         icon: <BarChartOutlined />,
         label: 'Analytics',
+    },
+    {
+        key: 'sheet',
+        icon: <FileExcelOutlined />,
+        label: 'Spreadsheet',
+    },
+    {
+        key: 'protocol',
+        icon: <FilePptOutlined />,
+        label: 'Protocol',
     },
 ];
