@@ -27,61 +27,7 @@ code {
   box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1) !important;
 }
 
-.theme-preset-card {
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid transparent;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.theme-preset-card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-.theme-preset-card:hover::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  pointer-events: none;
-  border-radius: 6px;
-}
-
-.theme-preset-card.selected {
-  border-color: #1677ff;
-  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.1);
-  transform: scale(1.02);
-}
-
-.theme-preset-card.selected::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 16px;
-  height: 16px;
-  background: #1677ff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.theme-preset-card.selected::after {
-  content: '✓';
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-}
-
+/* 保留theme-preview-box样式，因为还在使用 */
 .theme-preview-box {
   width: 88px;
   height: 52px;
@@ -91,30 +37,6 @@ code {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-}
-
-.theme-preset-card:hover .theme-preview-box {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: scale(1.05);
-}
-
-.color-preset-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.color-preset-circle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.color-preset-circle.selected {
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1677ff;
 }
 
 .admin-dropdown-trigger {

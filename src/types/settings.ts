@@ -6,3 +6,14 @@ export interface ThemePreset {
     borderColor: string;
     preview: React.ReactNode;
 }
+
+export interface ColorPreset {
+    color: string;
+    name: string;
+}
+
+export interface LanguageOption{
+    value: string;
+    label: string;
+    flag: string;
+}
