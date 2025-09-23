@@ -3,6 +3,7 @@ import { Switch, Select, Flex, Typography } from 'antd';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
 import { USER_STATUS_OPTIONS, THEME_CONFIG } from '../../../config/settings';
+import SettingItem from "../ThemeSettings/SettingItem.tsx";
 
 const { Text } = Typography;
 
@@ -19,15 +20,15 @@ const UserSettings: React.FC = () => {
 
   return (
     <div>
-      <div style={{ marginBottom: '16px' }}>
-        <Flex justify="space-between" align="center">
-          <Text style={labelStyle}>{t('allowUserRegistration')}</Text>
-          <Switch
-            checked={themeConfig.allowUserRegistration}
-            onChange={(checked) => setThemeConfig({ allowUserRegistration: checked })}
-          />
-        </Flex>
-      </div>
+      <SettingItem
+          label={t('allowUserRegistration')}
+          control={
+            <Switch
+                checked={themeConfig.allowUserRegistration}
+                onChange={(checked) => setThemeConfig({ allowUserRegistration: checked })}
+            />
+          }
+      />
       
       <div>
         <Flex justify="space-between" align="center">

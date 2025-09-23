@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Typography } from 'antd';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
-import type { ThemePreset } from '../../../types/settings';
+import type { ThemePreset } from '../../../types';
 import {
   DefaultThemePreview,
   DarkThemePreview,

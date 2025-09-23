@@ -1,11 +1,10 @@
 import React from 'react';
-import { Select, Flex, Typography } from 'antd';
+import {Select, Flex, Typography} from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
 import { LANGUAGE_OPTIONS, THEME_CONFIG } from '../../../config/settings';
 import {useSettingsStyles} from "../../../hooks";
-
 const { Text } = Typography;
 
 const LanguageSettings: React.FC = () => {
@@ -20,7 +19,6 @@ const LanguageSettings: React.FC = () => {
                 <GlobalOutlined style={{ marginRight: '8px' }} />
                 {t('languageSettings')}
             </Text>
-
             <Select
             value={themeConfig.language}
             onChange={(value) => setThemeConfig({ language: value })}
@@ -33,10 +31,9 @@ const LanguageSettings: React.FC = () => {
             ))}
           </Select>
         </Flex>
-
-      <Text style={styles.description}>
-        {t('languageDescription')}
-      </Text>
+        <Text style={styles.description}>
+          {t('languageDescription')}
+        </Text>
     </div>
   );
 };
