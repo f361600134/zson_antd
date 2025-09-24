@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   FileTextOutlined,
   BarChartOutlined,
-  FileExcelOutlined,
   FilePptOutlined
 } from '@ant-design/icons';
 import type { NavigationPage } from '../types';

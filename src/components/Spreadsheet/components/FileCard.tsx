@@ -1,11 +1,10 @@
 import React, {ReactNode} from 'react';
-import {Card, Typography, Tag, Tooltip, Space, Button} from 'antd';
-import { FileExcelOutlined, CalendarOutlined } from '@ant-design/icons';
+import {Card, Typography, Tooltip} from 'antd';
 import type { ExcelFile } from '../types';
 import { FILE_CARD_STYLE, FILE_CARD_HOVER_STYLE } from '../constants';
 import FileActionMenu from './FileActionMenu';
-import {removeFileExtension, formatFileSize, getBranchColor} from "../utils.ts";
-
+import {useThemeStore} from "../../../store/themeStore.ts";
+import {truncateFileName} from "../utils.ts";
 const { Text, Paragraph } = Typography;
 
 interface FileCardProps {
@@ -15,12 +14,17 @@ interface FileCardProps {
 }
 
 const FileCard: React.FC<FileCardProps> = ({ file, icon, onAction }) => {
+  const { themeConfig } = useThemeStore();
+
+  // const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     Object.assign(card.style, FILE_CARD_HOVER_STYLE);
-    card.style.borderColor = '#f0f0f0';
+    card.style.borderColor = themeConfig.colorPrimary;
+    // card.style.height = '130px';
     const actions = card.querySelector('.file-actions') as HTMLElement;
     if (actions) actions.style.opacity = '1';
+    // setIsHovered(true);
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -28,81 +32,57 @@ const FileCard: React.FC<FileCardProps> = ({ file, icon, onAction }) => {
     card.style.transform = 'scale(1)';
     card.style.boxShadow = '';
     card.style.borderColor = '';
+    // card.style.height = '120px';
     const actions = card.querySelector('.file-actions') as HTMLElement;
     if (actions) actions.style.opacity = '0';
+    // setIsHovered(false);
   };
 
   return (
-      <Tooltip title={file.name} placement="bottom">
-    <Card
-      style={FILE_CARD_STYLE}
-      bodyStyle={{
-        padding: '16px',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column'
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* 文件头部 - 图标和操作菜单 */}
-      <div style={{display: 'flex',justifyContent: 'space-between',alignItems: 'flex-start',marginBottom: '12px'}}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <div style={{
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            {icon}
-          </div>
-        </div>
-        <FileActionMenu file={file} onAction={onAction} />
-      </div>
-
-      {/* 文件主要内容区域 */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        {/* 文件名 */}
-        <Paragraph
-            strong
-            style={{
-              margin: 0,
-              fontSize: '12px',
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-              minHeight: '40px'
+      <Tooltip title={file.name} placement={"bottom"}>
+        <Card
+            style={FILE_CARD_STYLE}
+            bodyStyle={{
+              padding: '12px',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column'
             }}
-            ellipsis={{ rows: 2 }}
+            className="file-card"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
-            {(file.name)}
-          </Paragraph>
-      </div>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <div style={{  marginBottom: '12px' }}>
+              {icon}
+            </div>
 
-      {/* 文件信息 */}
-      <Space direction="vertical" size={4} style={{ width: '100%' }}>
-        {/* 更新时间 */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          fontSize: '12px',
-          color: '#6b7280'
-        }}>
-          <div style={{ fontSize: '10px', color: '#8c8c8c' }}>
-            <div style={{ marginBottom: '4px' }}>
-              {/*<CalendarOutlined style={{ marginRight: '4px' }} />*/}
-              {file.updateTime}
+            <div style={{ flex: 1 }}>
+              <Paragraph strong style={{
+                margin: 0,
+                fontSize: '12px',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+                minHeight: '40px'
+              }}
+             ellipsis={{ rows: 2 }}
+              >
+                {(file.name)}
+              </Paragraph>
+
+              <div style={{ fontSize: '10px', color: '#8c8c8c' }}>
+                <div style={{ marginBottom: '4px' }}>
+                  {file.updateTime}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </Space>
 
-    </Card>
-    </Tooltip>
+          <FileActionMenu file={file} onAction={onAction} />
+        </Card>
+      </Tooltip>
   );
 };
 

@@ -1,5 +1,4 @@
 // Spreadsheet 模块的类型定义
-
 export interface ExcelFile {
   id: string;
   name: string;
@@ -28,5 +27,6 @@ export interface FilterOptions {
 
 export interface FileActionMenuProps {
   file: ExcelFile | JsonFile;
+  onPreview: (file: ExcelFile | JsonFile) => void;
   onAction: (action: string, fileName: string) => void;
 }

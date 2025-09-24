@@ -4,7 +4,7 @@ import { useResponsiveColumns } from '../hooks/useResponsiveColumns';
 import ExcelFileCard from './ExcelFileCard';
 import JsonFileCard from './JsonFileCard';
 import FileCard from "./FileCard.tsx";
-import {FileExcelOutlined} from "@ant-design/icons";
+import {FileExcelOutlined, FileTextOutlined} from "@ant-design/icons";
 
 interface FileGridViewProps<T extends ExcelFile | JsonFile> {
   files: T[];
@@ -33,10 +33,14 @@ function FileGridView<T extends ExcelFile | JsonFile>({
                   file={file as ExcelFile}
                   onAction={onAction} />
           ) : (
-            <JsonFileCard 
-              file={file as JsonFile} 
-              onAction={onAction} 
-            />
+            // <JsonFileCard
+            //   file={file as JsonFile}
+            //   onAction={onAction}
+            // />
+              <FileCard
+                  icon = {<FileTextOutlined style={{fontSize: '16px',color: '#1677ff'}} />}
+                  file= {file as JsonFile}
+                  onAction = {onAction} />
           )}
         </Col>
       ))}

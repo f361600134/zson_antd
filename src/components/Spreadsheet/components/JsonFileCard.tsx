@@ -51,7 +51,6 @@ const JsonFileCard: React.FC<JsonFileCardProps> = ({ file, onAction }) => {
         </div>
 
         <div style={{ flex: 1 }}>
-
             <Text strong style={{
               display: 'block',
               marginBottom: '8px',
