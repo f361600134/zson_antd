@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown } from 'antd';
+import { Button, Dropdown, theme } from 'antd';
 import { 
   EyeOutlined, 
   DownloadOutlined, 
@@ -8,8 +8,12 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import type { FileActionMenuProps } from '../types';
+import { useThemeStore } from '../../../store/themeStore';
 
 const FileActionMenu: React.FC<FileActionMenuProps> = ({ file, onAction }) => {
+  const { token } = theme.useToken();
+  const { themeConfig } = useThemeStore();
+
   const menuItems: MenuProps['items'] = [
     {
       key: 'view',
@@ -35,6 +39,23 @@ const FileActionMenu: React.FC<FileActionMenuProps> = ({ file, onAction }) => {
     }
   ];
 
+  // 根据主题模式动态调整按钮样式
+  const buttonStyle: React.CSSProperties = {
+    backgroundColor: themeConfig.themeMode === 'dark' 
+      ? 'rgba(255, 255, 255, 0.04)' 
+      : 'rgba(255, 255, 255, 0.9)',
+    backdropFilter: 'blur(8px)',
+    boxShadow: themeConfig.themeMode === 'dark'
+      ? '0 2px 8px rgba(0, 0, 0, 0.3)'
+      : '0 2px 8px rgba(0, 0, 0, 0.1)',
+    border: themeConfig.themeMode === 'dark'
+      ? `1px solid ${token.colorBorderSecondary}`
+      : 'none',
+    color: themeConfig.themeMode === 'dark'
+      ? token.colorText
+      : token.colorTextSecondary
+  };
+
   return (
     <div
       className="file-actions"
@@ -43,23 +64,36 @@ const FileActionMenu: React.FC<FileActionMenuProps> = ({ file, onAction }) => {
         top: '8px',
         right: '8px',
         opacity: 0,
-        transition: 'opacity 0.3s ease'
+        transition: 'opacity 0.3s ease',
+        zIndex: 10
       }}
     >
       <Dropdown 
         menu={{ items: menuItems }} 
         trigger={['click']}
         placement="bottomRight"
+        overlayStyle={{
+          minWidth: '120px'
+        }}
       >
         <Button
           type="text"
           icon={<MoreOutlined />}
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
-          }}
+          size="small"
+          style={buttonStyle}
+          className="file-action-button"
         />
       </Dropdown>
+
+      <style jsx>{`
+        .file-action-button:hover {
+          background-color: ${themeConfig.themeMode === 'dark' 
+            ? 'rgba(255, 255, 255, 0.08)' 
+            : 'rgba(0, 0, 0, 0.04)'
+          } !important;
+          transform: scale(1.05);
+        }
+      `}</style>
     </div>
   );
 };

@@ -1,5 +1,7 @@
+import React from 'react';
 import { Row, Col } from 'antd';
 import type { ExcelFile, JsonFile } from '../types';
+import { useResponsiveColumns } from '../hooks/useResponsiveColumns';
 import ExcelFileCard from './ExcelFileCard';
 import JsonFileCard from './JsonFileCard';
 
@@ -14,10 +16,12 @@ function FileGridView<T extends ExcelFile | JsonFile>({
   fileType, 
   onAction 
 }: FileGridViewProps<T>) {
+  const responsiveColumns = useResponsiveColumns();
+
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[12, 12]}> {/* 减小间距从16到12 */}
       {files.map((file) => (
-        <Col xs={24} sm={12} md={8} lg={6} key={file.id}>
+        <Col {...responsiveColumns} key={file.id}>
           {fileType === 'excel' ? (
             <ExcelFileCard 
               file={file as ExcelFile} 

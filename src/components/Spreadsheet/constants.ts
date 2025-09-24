@@ -97,7 +97,7 @@ export const MOCK_JSON_FILES: JsonFile[] = [
 
 // 样式常量
 export const FILE_CARD_STYLE: React.CSSProperties = {
-  height: '180px',
+  height: '140px', // 从180px减小到140px（约减小22%）
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   position: 'relative',
