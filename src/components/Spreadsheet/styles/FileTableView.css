@@ -1,0 +1,73 @@
+/* 文件表格样式优化 */
+.file-table-row {
+  transition: background-color 0.2s ease;
+}
+
+.file-table-row:hover {
+  background-color: var(--ant-color-fill-tertiary) !important;
+}
+
+.file-table-row:hover .ant-btn {
+  opacity: 1;
+}
+
+.file-table-row .ant-btn {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.file-table-row .ant-btn:hover {
+  opacity: 1;
+}
+
+/* 表格分页样式 */
+.ant-table-pagination.ant-pagination {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/* 文件名单元格优化 */
+.file-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.file-name-text {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.file-name-text:hover {
+  color: var(--ant-color-primary);
+}
+
+/* 标签组合样式 */
+.file-tags {
+  margin-top: 2px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* 操作按钮组样式 */
+.file-actions {
+  display: flex;
+  gap: 4px;
+}
+
+/* 响应式处理 */
+@media (max-width: 768px) {
+  .ant-table-tbody > tr > td {
+    padding: 8px 4px;
+  }
+  
+  .file-name-cell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

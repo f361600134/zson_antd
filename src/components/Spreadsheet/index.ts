@@ -31,6 +31,7 @@ export {
 // 导出 hooks
 export { useFileData } from './hooks/useFileData';
 export { useFileActions } from './hooks/useFileActions';
+export { usePagination } from './hooks/usePagination';
 
 // 导出子组件（如果需要单独使用）
 export { default as FileActionMenu } from './components/FileActionMenu';
@@ -38,5 +39,5 @@ export { default as FileToolbar } from './components/FileToolbar';
 export { default as ExcelFileCard } from './components/ExcelFileCard';
 export { default as JsonFileCard } from './components/JsonFileCard';
 export { default as FileGridView } from './components/FileGridView';
-export { default as FileListView } from './components/FileListView';
+export { default as FileTableView } from './components/FileTableView';
 export { default as FileTab } from './components/FileTab';

@@ -4,7 +4,8 @@ import {
   SearchOutlined,
   AppstoreOutlined,
   UnorderedListOutlined,
-  BranchesOutlined
+  BranchesOutlined,
+  TableOutlined
 } from '@ant-design/icons';
 import type { ViewMode, FilterOptions } from '../types';
 import { BRANCHES } from '../constants';
@@ -70,10 +71,10 @@ const FileToolbar: React.FC<FileToolbarProps> = ({
           </Button>
           <Button
             type={viewMode === 'list' ? 'primary' : 'default'}
-            icon={<UnorderedListOutlined />}
+            icon={<TableOutlined />}
             onClick={() => onViewModeChange('list')}
           >
-            列表
+            表格
           </Button>
         </Button.Group>
       </Space>

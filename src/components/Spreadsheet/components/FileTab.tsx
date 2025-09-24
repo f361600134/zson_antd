@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Empty } from 'antd';
 import type { ExcelFile, JsonFile, ViewMode, FilterOptions } from '../types';
+import { usePagination } from '../hooks/usePagination';
 import FileToolbar from './FileToolbar';
 import FileGridView from './FileGridView';
-import FileListView from './FileListView';
+import FileTableView from './FileTableView';
 
 interface FileTabProps<T extends ExcelFile | JsonFile> {
   files: T[];
@@ -26,6 +27,20 @@ function FileTab<T extends ExcelFile | JsonFile>({
   onViewModeChange,
   onAction
 }: FileTabProps<T>) {
+  const {
+    getPaginatedData,
+    getPaginationConfig,
+    resetPagination
+  } = usePagination(10);
+
+  // 当筛选条件改变时重置分页
+  useEffect(() => {
+    resetPagination();
+  }, [filterOptions, resetPagination]);
+
+  const paginatedFiles = viewMode === 'list' ? getPaginatedData(files) : files;
+  const paginationConfig = getPaginationConfig(files.length);
+
   return (
     <>
       <FileToolbar
@@ -36,7 +51,10 @@ function FileTab<T extends ExcelFile | JsonFile>({
       />
 
       {files.length === 0 ? (
-        <Empty description={emptyDescription} />
+        <Empty 
+          description={emptyDescription}
+          style={{ margin: '40px 0' }}
+        />
       ) : (
         <>
           {viewMode === 'grid' ? (
@@ -46,10 +64,11 @@ function FileTab<T extends ExcelFile | JsonFile>({
               onAction={onAction} 
             />
           ) : (
-            <FileListView 
-              files={files} 
-              fileType={fileType} 
-              onAction={onAction} 
+            <FileTableView
+              files={paginatedFiles}
+              fileType={fileType}
+              pagination={paginationConfig}
+              onAction={onAction}
             />
           )}
         </>

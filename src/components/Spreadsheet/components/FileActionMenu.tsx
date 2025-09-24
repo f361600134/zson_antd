@@ -84,16 +84,6 @@ const FileActionMenu: React.FC<FileActionMenuProps> = ({ file, onAction }) => {
           className="file-action-button"
         />
       </Dropdown>
-
-      <style jsx>{`
-        .file-action-button:hover {
-          background-color: ${themeConfig.themeMode === 'dark' 
-            ? 'rgba(255, 255, 255, 0.08)' 
-            : 'rgba(0, 0, 0, 0.04)'
-          } !important;
-          transform: scale(1.05);
-        }
-      `}</style>
     </div>
   );
 };
