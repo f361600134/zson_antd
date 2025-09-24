@@ -17,6 +17,7 @@ const JsonFileCard: React.FC<JsonFileCardProps> = ({ file, onAction }) => {
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     Object.assign(card.style, FILE_CARD_HOVER_STYLE);
+    card.style.borderColor = '#f0f0f0';
     const actions = card.querySelector('.file-actions') as HTMLElement;
     if (actions) actions.style.opacity = '1';
   };
@@ -25,11 +26,13 @@ const JsonFileCard: React.FC<JsonFileCardProps> = ({ file, onAction }) => {
     const card = e.currentTarget;
     card.style.transform = 'scale(1)';
     card.style.boxShadow = '';
+    card.style.borderColor = '';
     const actions = card.querySelector('.file-actions') as HTMLElement;
     if (actions) actions.style.opacity = '0';
   };
 
   return (
+      <Tooltip title={file.name} placement={"bottom"}>
     <Card
       style={FILE_CARD_STYLE}
       bodyStyle={{ 
@@ -43,51 +46,36 @@ const JsonFileCard: React.FC<JsonFileCardProps> = ({ file, onAction }) => {
       onMouseLeave={handleMouseLeave}
     >
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{ textAlign: 'center', marginBottom: '12px' }}>
-          <FileTextOutlined style={{ fontSize: '48px', color: '#1677ff' }} />
+        <div style={{  marginBottom: '12px' }}>
+          <FileTextOutlined style={{ fontSize: '16px', color: '#1677ff' }} />
         </div>
 
         <div style={{ flex: 1 }}>
-          <Tooltip title={file.name}>
+
             <Text strong style={{
               display: 'block',
               marginBottom: '8px',
               fontSize: '14px',
               lineHeight: '20px',
-              height: '40px',
+              // height: '40px',
               overflow: 'hidden'
             }}>
               {truncateFileName(file.name)}
             </Text>
-          </Tooltip>
 
-          <div style={{ fontSize: '12px', color: '#8c8c8c' }}>
+          <div style={{ fontSize: '10px', color: '#8c8c8c' }}>
             <div style={{ marginBottom: '4px' }}>
-              <CalendarOutlined style={{ marginRight: '4px' }} />
-              {file.updateTime.split(' ')[0]}
+              {/*<CalendarOutlined style={{ marginRight: '4px' }} />*/}
+              {/*{file.updateTime.split(' ')[0]}*/}
+              {file.updateTime}
             </div>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '4px'
-            }}>
-              <Tag color={getBranchColor(file.branch)}>
-                {file.branch}
-              </Tag>
-              <Text style={{ fontSize: '12px', color: '#8c8c8c' }}>
-                {file.size}
-              </Text>
-            </div>
-            <Tag color={getJsonTypeColor(file.type)}>
-              {file.type}
-            </Tag>
           </div>
         </div>
       </div>
 
       <FileActionMenu file={file} onAction={onAction} />
     </Card>
+      </Tooltip>
   );
 };
 
