@@ -32,34 +32,38 @@ const ExcelFileCard: React.FC<ExcelFileCardProps> = ({ file, onAction }) => {
   return (
     <Card
       style={FILE_CARD_STYLE}
-      bodyStyle={{ 
-        padding: '16px', 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column' 
+      bodyStyle={{
+        padding: '16px',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
       }}
       className="file-card"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        {/* ICon */}
         <div style={{ textAlign: 'center', marginBottom: '12px' }}>
-          <FileExcelOutlined style={{ fontSize: '48px', color: '#52c41a' }} />
+          <FileExcelOutlined style={{ fontSize: '20px', color: '#52c41a' }} />
         </div>
 
+
+
+        {/* File name */}
         <div style={{ flex: 1 }}>
-          <Tooltip title={file.name}>
-            <Text strong style={{
-              display: 'block',
-              marginBottom: '8px',
-              fontSize: '14px',
-              lineHeight: '20px',
-              height: '40px',
-              overflow: 'hidden'
-            }}>
-              {truncateFileName(file.name)}
-            </Text>
-          </Tooltip>
+          <Text strong style={{
+            // display: 'block',
+            // marginBottom: '8px',
+            fontSize: '12px',
+            // lineHeight: '20px',
+            // //height: '40px',
+            // overflow: 'hidden'
+          }}
+            ellipsis={{tooltip:file.name}}
+          >
+            {file.name}
+          </Text>
 
           <div style={{ fontSize: '12px', color: '#8c8c8c' }}>
             <div style={{ marginBottom: '4px' }}>
