@@ -50,7 +50,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
     if (fileType === 'json') {
       const jsonFile = record as JsonFile;
       return (
-        <Tag color={getJsonTypeColor(jsonFile.type)} size="small">
+        <Tag color={getJsonTypeColor(jsonFile.type)}>
           {jsonFile.type}
         </Tag>
       );
@@ -157,7 +157,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
               </Text>
             </Tooltip>
             <div style={{ marginTop: '2px' }}>
-              <Tag color={getBranchColor(record.branch)} size="small">
+              <Tag color={getBranchColor(record.branch)}>
                 {record.branch}
               </Tag>
               {getFileTypeTag(record)}

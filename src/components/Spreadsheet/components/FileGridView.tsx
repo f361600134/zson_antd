@@ -1,4 +1,3 @@
-import React from 'react';
 import { Row, Col } from 'antd';
 import type { ExcelFile, JsonFile } from '../types';
 import { useResponsiveColumns } from '../hooks/useResponsiveColumns';

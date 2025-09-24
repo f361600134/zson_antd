@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Empty } from 'antd';
 import type { ExcelFile, JsonFile, ViewMode, FilterOptions } from '../types';
 import { usePagination } from '../hooks/usePagination';
