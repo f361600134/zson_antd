@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Flex, Typography } from 'antd';
+import { Flex, Typography, ColorPicker as AntdColorPicker } from 'antd';
 import { useThemeStore } from '../../../store/themeStore';
 import { useTranslation } from '../../../utils/i18n';
 import { useSettingsStyles } from '../../../hooks';
@@ -24,12 +24,24 @@ const ColorPicker: React.FC = () => {
         <Text style={settingsStyles.text.label}>
           {t('primaryColor')}：
         </Text>
-        
-        <Input 
-          value={themeConfig.colorPrimary}
-          onChange={(e) => setThemeConfig({ colorPrimary: e.target.value })}
-          style={settingsStyles.form.input}
-          size="middle"
+
+        {/*使用AntdColorPicker 替代*/}
+        {/*<Input*/}
+        {/*  value={themeConfig.colorPrimary}*/}
+        {/*  onChange={(e) => setThemeConfig({ colorPrimary: e.target.value })}*/}
+        {/*  style={settingsStyles.form.input}*/}
+        {/*  size="middle"*/}
+        {/*/>*/}
+
+        {/* 这里是新增的 Ant Design ColorPicker 组件 */}
+        <AntdColorPicker
+            value={themeConfig.colorPrimary}
+            showText
+            onChange={(color) => {
+              // Antd ColorPicker 的 onChange 回调返回的是一个 Color 对象
+              // 需要使用 .toHexString() 方法获取十六进制颜色值
+              setThemeConfig({ colorPrimary: color.toHexString() });
+            }}
         />
         
         <div style={settingsStyles.grid.colorPalette}>

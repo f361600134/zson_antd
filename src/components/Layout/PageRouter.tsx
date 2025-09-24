@@ -1,7 +1,7 @@
 import React, { Suspense, useMemo } from 'react';
 import { Spin, Result, Button } from 'antd';
 import { ExclamationCircleOutlined, ReloadOutlined } from '@ant-design/icons';
-import type { NavigationPage } from '../../types/navigation';
+import type { NavigationPage } from '../../types';
 import { usePageRouter } from '../../hooks/usePageRouter';
 
 interface PageRouterProps {
@@ -28,7 +28,7 @@ class PageErrorBoundary extends React.Component<
   },
   PageErrorBoundaryState
 > {
-  constructor(props: any) {
+  constructor(props: never) {
     super(props);
     this.state = { hasError: false };
   }
@@ -178,8 +178,8 @@ const PageRouter: React.FC<PageRouterProps> = ({
   }, [pageConfig, currentPage, canAccess, enableAccessControl, onNavigate]);
 
   return (
-    <PageErrorBoundary 
-      fallback={pageConfig?.fallback} 
+    <PageErrorBoundary
+      fallback={pageConfig?.fallback}
       onRetry={() => window.location.reload()}
     >
       <Suspense fallback={<FallbackComponent />}>

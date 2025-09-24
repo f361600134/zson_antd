@@ -5,7 +5,7 @@ import {
   FileExcelOutlined,
   FilePptOutlined
 } from '@ant-design/icons';
-import type { NavigationPage } from '../types/navigation';
+import type { NavigationPage } from '../types';
 
 // 组件懒加载导入
 const Dashboard = React.lazy(() => import('../components/Dashboard/Dashboard'));
@@ -14,6 +14,7 @@ const PersonalProfile = React.lazy(() => import('../components/Profile/PersonalP
 const AdminPanel = React.lazy(() => import('../components/Admin/AdminPanel'));
 const TeamManagement = React.lazy(() => import('../components/Team/TeamManagement'));
 const Placeholder = React.lazy(() => import('../components/Common/Placeholder'));
+const Spreadsheet = React.lazy(() => import('../components/Spreadsheet/Spreadsheet'));
 
 // 页面配置接口
 export interface PageConfig {
@@ -32,15 +33,21 @@ export interface PageConfig {
 }
 
 // 创建占位符组件的工厂函数
-const createPlaceholder = (icon: React.ReactNode, title: string, text: string) => {
-  return React.memo(() => (
-    <Placeholder
-      icon={icon}
-      title={title}
-      text={text}
-    />
-  ));
-};
+// 这种写法memo的意义不大, 使用高阶函数替换
+// const createPlaceholder = (icon: React.ReactNode, title: string, text: string) => {
+//   return React.memo(() => (
+//     <Placeholder
+//       icon={icon}
+//       title={title}
+//       text={text}
+//     />
+//   ));
+// };
+const createPlaceholder = (props: React.ComponentProps<typeof Placeholder> ) => {
+  const comp : React.FC =() => <Placeholder {...props}/>;
+  comp.displayName = 'Placeholder(${props.title})';
+  return comp;
+}
 
 // 页面配置注册表
 export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
@@ -108,9 +115,11 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
   documents: {
     key: 'documents',
     component: createPlaceholder(
-      <FileTextOutlined />, 
-      'Documents Page', 
-      'This page is under development'
+        {
+          icon: <FileTextOutlined />,
+          title: 'Documents Page',
+          text:'This page is under development'
+        }
     ),
     title: '文档管理',
     description: '文档存储和管理系统',
@@ -124,9 +133,11 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
   analytics: {
     key: 'analytics',
     component: createPlaceholder(
-      <BarChartOutlined />, 
-      'Analytics Page', 
-      'This page is under development'
+        {
+          icon: <BarChartOutlined />,
+          title: 'Analytics Page',
+          text:'This page is under development'
+        }
     ),
     title: '数据分析',
     description: '业务数据分析和报表',
@@ -140,11 +151,7 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
 
   sheet: {
     key: 'sheet',
-    component: createPlaceholder(
-      <FileExcelOutlined />, 
-      'Spreadsheet Page', 
-      'This page is under development'
-    ),
+    component: Spreadsheet,
     title: '电子表格',
     description: '在线电子表格编辑器',
     requiresAuth: true,
@@ -157,9 +164,11 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
   protocol: {
     key: 'protocol',
     component: createPlaceholder(
-      <FilePptOutlined />, 
-      'Protocol Page', 
-      'This page is under development'
+      {
+        icon: <FilePptOutlined />,
+        title: 'Protocol Page',
+        text:'This page is under development'
+      }
     ),
     title: '协议管理',
     description: '协议文档和演示文稿管理',
