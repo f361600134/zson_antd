@@ -5,6 +5,7 @@ import type {ViewMode, FilterOptions} from './types';
 import {useFileData} from './hooks/useFileData';
 import {useFileActions} from './hooks/useFileActions';
 import FileTab from './components/FileTab';
+import {useJsonViewer} from "./components/useJsonViewer.tsx";
 
 const {TabPane} = Tabs;
 
@@ -19,12 +20,16 @@ const Spreadsheet: React.FC = () => {
 
     // 自定义 hooks
     const {getFilteredFiles} = useFileData();
-    const {handleFileAction} = useFileActions();
+    //const {handleFileAction} = useFileActions();
 
     // 处理过滤器变更
     const handleFilterChange = (newOptions: Partial<FilterOptions>) => {
         setFilterOptions(prev => ({...prev, ...newOptions}));
     };
+
+
+    const { showJson, JsonModal } = useJsonViewer();
+    const { handleFileAction } = useFileActions({ showJson });
 
     // 获取过滤后的文件数据
     const filteredExcelFiles = getFilteredFiles.excel(filterOptions);
@@ -65,6 +70,7 @@ const Spreadsheet: React.FC = () => {
                     </TabPane>
                 </Tabs>
             </Card>
+            {JsonModal}
         </div>
     );
 };

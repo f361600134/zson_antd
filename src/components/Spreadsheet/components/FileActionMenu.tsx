@@ -16,14 +16,14 @@ const FileActionMenu: React.FC<FileActionMenuProps> = ({ file, onAction }) => {
       key: 'download',
       label: '下载',
       icon: <DownloadOutlined />,
-      onClick: () => onAction('download', file.name)
+      onClick: () => onAction('download', file)
     },
     {
       key: 'delete',
       label: '删除',
       icon: <DeleteOutlined />,
       danger: true,
-      onClick: () => onAction('delete', file.name)
+      onClick: () => onAction('delete', file)
     }
   ];
 
@@ -44,6 +44,7 @@ const FileActionMenu: React.FC<FileActionMenuProps> = ({ file, onAction }) => {
             type="text"
             icon={<EyeOutlined />}
             // onClick={handlePreviewClick}
+            onClick={()=>onAction('view', file)}
             size="small"
         />
 
