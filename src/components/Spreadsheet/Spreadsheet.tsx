@@ -33,20 +33,10 @@ const Spreadsheet: React.FC = () => {
     return (
         <div>
             <Card>
-                <Tabs
-                    activeKey={activeTab}
-                    onChange={setActiveTab}
-                    size="large"
-                >
-                    <TabPane
-                        tab={
-                            <span>
-                <FileExcelOutlined/>
-                EXCEL
-              </span>
-                        }
-                        key="excel"
-                    >
+                <Tabs activeKey={activeTab} onChange={setActiveTab}  size="large" >
+                    <TabPane tab={
+                        <span> <FileExcelOutlined/> EXCEL </span>
+                    } key="excel">
                         <FileTab
                             files={filteredExcelFiles}
                             fileType="excel"
@@ -58,16 +48,10 @@ const Spreadsheet: React.FC = () => {
                             onAction={handleFileAction}
                         />
                     </TabPane>
-
-                    <TabPane
-                        tab={
-                            <span>
-                <FileTextOutlined/>
-                JSON
-              </span>
+                    <TabPane tab={
+                        <span><FileTextOutlined/>JSON</span>
                         }
-                        key="json"
-                    >
+                        key="json">
                         <FileTab
                             files={filteredJsonFiles}
                             fileType="json"

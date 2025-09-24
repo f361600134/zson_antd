@@ -1,4 +1,4 @@
-import { Table, Tag, Button, Tooltip, Space, Typography } from 'antd';
+import { Table, Button, Tooltip, Space, Typography } from 'antd';
 import '../styles/FileTableView.css';
 import type { ColumnsType } from 'antd/es/table';
 import {
@@ -9,7 +9,6 @@ import {
   DeleteOutlined
 } from '@ant-design/icons';
 import type { ExcelFile, JsonFile } from '../types';
-import { getBranchColor, getJsonTypeColor } from '../utils';
 import dayjs from 'dayjs';
 
 const { Text } = Typography;
@@ -46,18 +45,6 @@ function FileTableView<T extends ExcelFile | JsonFile>({
     }
   };
 
-  const getFileTypeTag = (record: T) => {
-    if (fileType === 'json') {
-      const jsonFile = record as JsonFile;
-      return (
-        <Tag color={getJsonTypeColor(jsonFile.type)}>
-          {jsonFile.type}
-        </Tag>
-      );
-    }
-    return null;
-  };
-
   const formatFileSize = (size: string) => {
     return (
       <Text type="secondary" style={{ fontSize: '13px' }}>
@@ -66,25 +53,32 @@ function FileTableView<T extends ExcelFile | JsonFile>({
     );
   };
 
-  const formatTime = (time: string) => {
-    const isToday = dayjs(time).isSame(dayjs(), 'day');
-    const isYesterday = dayjs(time).isSame(dayjs().subtract(1, 'day'), 'day');
-    
+  const formatTime = (time: string): React.ReactElement => {
+    const dayjsTime = dayjs(time);
+    const today = dayjs();
+    const yesterday = today.subtract(1, 'day');
     let displayTime: string;
-    if (isToday) {
-      displayTime = `今天 ${dayjs(time).format('HH:mm')}`;
-    } else if (isYesterday) {
-      displayTime = `昨天 ${dayjs(time).format('HH:mm')}`;
+
+    if (dayjsTime.isSame(today, 'day')) {
+      // If the time is today
+      displayTime = `今天 ${dayjsTime.format('HH:mm')}`;
+    } else if (dayjsTime.isSame(yesterday, 'day')) {
+      // If the time is yesterday
+      displayTime = `昨天 ${dayjsTime.format('HH:mm')}`;
+    } else if (!dayjsTime.isSame(today, 'year')) {
+      // If the time is not in the current year
+      displayTime = dayjsTime.format('YYYY-MM-DD HH:mm');
     } else {
-      displayTime = dayjs(time).format('MM-DD HH:mm');
+      // If the time is in the current year but not today or yesterday
+      displayTime = dayjsTime.format('MM-DD HH:mm');
     }
-    
+
     return (
-      <Tooltip title={time}>
-        <Text style={{ fontSize: '13px' }}>
-          {displayTime}
-        </Text>
-      </Tooltip>
+        <Tooltip title={time}>
+          <Text style={{ fontSize: '13px' }}>
+            {displayTime}
+          </Text>
+        </Tooltip>
     );
   };
 
@@ -156,12 +150,12 @@ function FileTableView<T extends ExcelFile | JsonFile>({
                 {name}
               </Text>
             </Tooltip>
-            <div style={{ marginTop: '2px' }}>
-              <Tag color={getBranchColor(record.branch)}>
-                {record.branch}
-              </Tag>
-              {getFileTypeTag(record)}
-            </div>
+            {/*<div style={{ marginTop: '2px' }}>*/}
+            {/*  <Tag color={getBranchColor(record.branch)}>*/}
+            {/*    {record.branch}*/}
+            {/*  </Tag>*/}
+            {/*  {getFileTypeTag(record)}*/}
+            {/*</div>*/}
           </div>
         </div>
       ),

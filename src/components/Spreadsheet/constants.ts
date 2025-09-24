@@ -73,7 +73,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     id: '9',
     name: 'cw.宠物属性资质.xlsx',
     createTime: '2024-12-10 08:30:00',
-    updateTime: '2025-01-07 15:10:00',
+    updateTime: '2024-01-07 15:10:00',
     branch: 'develop',
     size: '2.8MB'
   }
