@@ -3,7 +3,6 @@ import { Input, Select, Button, Space } from 'antd';
 import {
   SearchOutlined,
   AppstoreOutlined,
-  UnorderedListOutlined,
   BranchesOutlined,
   TableOutlined
 } from '@ant-design/icons';

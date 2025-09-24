@@ -4,8 +4,7 @@ import type { ExcelFile } from '../types';
 import { FILE_CARD_STYLE, FILE_CARD_HOVER_STYLE } from '../constants';
 import FileActionMenu from './FileActionMenu';
 import {useThemeStore} from "../../../store/themeStore.ts";
-import {truncateFileName} from "../utils.ts";
-const { Text, Paragraph } = Typography;
+const { Paragraph } = Typography;
 
 interface FileCardProps {
   file: ExcelFile;

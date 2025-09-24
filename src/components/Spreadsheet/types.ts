@@ -27,6 +27,6 @@ export interface FilterOptions {
 
 export interface FileActionMenuProps {
   file: ExcelFile | JsonFile;
-  onPreview: (file: ExcelFile | JsonFile) => void;
+  //onPreview: (file: ExcelFile | JsonFile) => void;
   onAction: (action: string, fileName: string) => void;
 }
