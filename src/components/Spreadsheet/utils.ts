@@ -1,15 +1,6 @@
 import type { ExcelFile, JsonFile, FilterOptions } from './types';
 
 /**
- * 截断文件名
- */
-export const truncateFileName = (name: string, maxLength: number = 25): string => {
-  //return name.length > maxLength ? `${name.substring(0, maxLength)}...` : name;
-  return name;
-};
-
-
-/**
  * 获取JSON文件类型对应的颜色
  */
 export const getJsonTypeColor = (type: string): string => {

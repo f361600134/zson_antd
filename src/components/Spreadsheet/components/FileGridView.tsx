@@ -3,11 +3,12 @@ import type { ExcelFile, JsonFile } from '../types';
 import { useResponsiveColumns } from '../hooks/useResponsiveColumns';
 import FileCard from "./FileCard.tsx";
 import {FileExcelOutlined, FileTextOutlined} from "@ant-design/icons";
+import {FileAction, FileType} from "../hooks/useFileActions.ts";
 
 interface FileGridViewProps<T extends ExcelFile | JsonFile> {
   files: T[];
-  fileType: 'excel' | 'json';
-  onAction: (action: string, fileName: string) => void;
+  fileType: FileType;
+  onAction: (action: FileAction, fileName: ExcelFile | JsonFile) => void;
 }
 
 function FileGridView<T extends ExcelFile | JsonFile>({ 

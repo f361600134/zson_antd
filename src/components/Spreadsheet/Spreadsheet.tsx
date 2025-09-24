@@ -45,7 +45,7 @@ const Spreadsheet: React.FC = () => {
                             emptyDescription="没有找到匹配的 Excel 文件"
                             onFilterChange={handleFilterChange}
                             onViewModeChange={setViewMode}
-                            onAction={handleFileAction}
+                            onAction={(action, file) => handleFileAction(action, file, "excel")}
                         />
                     </TabPane>
                     <TabPane tab={
@@ -60,7 +60,7 @@ const Spreadsheet: React.FC = () => {
                             emptyDescription="没有找到匹配的 JSON 文件"
                             onFilterChange={handleFilterChange}
                             onViewModeChange={setViewMode}
-                            onAction={handleFileAction}
+                            onAction={(action, file) => handleFileAction(action, file, "json")}
                         />
                     </TabPane>
                 </Tabs>

@@ -10,10 +10,14 @@ export type {
   FileActionMenuProps
 } from './types';
 
+export type{
+  FileType,
+  FileAction
+
+} from './hooks/useFileActions';
+
 // 导出工具函数
 export {
-  truncateFileName,
-  getBranchColor,
   getJsonTypeColor,
   filterExcelFiles,
   filterJsonFiles
@@ -36,8 +40,6 @@ export { usePagination } from './hooks/usePagination';
 // 导出子组件（如果需要单独使用）
 export { default as FileActionMenu } from './components/FileActionMenu';
 export { default as FileToolbar } from './components/FileToolbar';
-export { default as ExcelFileCard } from './components/ExcelFileCard';
-export { default as JsonFileCard } from './components/JsonFileCard';
 export { default as FileGridView } from './components/FileGridView';
 export { default as FileTableView } from './components/FileTableView';
 export { default as FileTab } from './components/FileTab';

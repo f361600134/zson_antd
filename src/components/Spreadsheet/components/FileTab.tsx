@@ -5,16 +5,17 @@ import { usePagination } from '../hooks/usePagination';
 import FileToolbar from './FileToolbar';
 import FileGridView from './FileGridView';
 import FileTableView from './FileTableView';
+import {FileAction, FileType} from "../hooks/useFileActions.ts";
 
 interface FileTabProps<T extends ExcelFile | JsonFile> {
   files: T[];
-  fileType: 'excel' | 'json';
+  fileType: FileType;
   filterOptions: FilterOptions;
   viewMode: ViewMode;
   emptyDescription: string;
   onFilterChange: (options: Partial<FilterOptions>) => void;
   onViewModeChange: (mode: ViewMode) => void;
-  onAction: (action: string, fileName: string) => void;
+  onAction: (action: FileAction, file: ExcelFile | JsonFile) => void;
 }
 
 function FileTab<T extends ExcelFile | JsonFile>({

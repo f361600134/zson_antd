@@ -10,12 +10,13 @@ import {
 } from '@ant-design/icons';
 import type { ExcelFile, JsonFile } from '../types';
 import dayjs from 'dayjs';
+import {FileAction, FileType} from "../hooks/useFileActions.ts";
 
 const { Text } = Typography;
 
 interface FileTableViewProps<T extends ExcelFile | JsonFile> {
   files: T[];
-  fileType: 'excel' | 'json';
+  fileType: FileType;
   loading?: boolean;
   pagination?: {
     current: number;
@@ -26,7 +27,7 @@ interface FileTableViewProps<T extends ExcelFile | JsonFile> {
     showTotal?: (total: number, range: [number, number]) => string;
     onChange?: (page: number, pageSize: number) => void;
   };
-  onAction: (action: string, fileName: string) => void;
+  onAction: (action: FileAction, file: ExcelFile | JsonFile) => void;
 }
 
 function FileTableView<T extends ExcelFile | JsonFile>({
@@ -37,7 +38,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
   onAction
 }: FileTableViewProps<T>) {
   
-  const getFileIcon = (record: T) => {
+  const getFileIcon = () => {
     if (fileType === 'excel') {
       return <FileExcelOutlined style={{ color: '#52c41a', fontSize: '16px' }} />;
     } else {
@@ -91,7 +92,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
           icon={<EyeOutlined />}
           onClick={(e) => {
             e.stopPropagation();
-            onAction('view', record.name);
+            onAction('view', record);
           }}
         />
       </Tooltip>
@@ -102,7 +103,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
           icon={<DownloadOutlined />}
           onClick={(e) => {
             e.stopPropagation();
-            onAction('download', record.name);
+            onAction('download', record);
           }}
         />
       </Tooltip>
@@ -114,7 +115,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
           danger
           onClick={(e) => {
             e.stopPropagation();
-            onAction('delete', record.name);
+            onAction('delete', record);
           }}
         />
       </Tooltip>
@@ -132,7 +133,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
       },
       render: (name: string, record: T) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {getFileIcon(record)}
+          {getFileIcon()}
           <div style={{ flex: 1, minWidth: 0 }}>
             <Tooltip title={name}>
               <Text
@@ -145,7 +146,7 @@ function FileTableView<T extends ExcelFile | JsonFile>({
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap'
                 }}
-                onClick={() => onAction('view', name)}
+                //onClick={() => onAction('view', record)}
               >
                 {name}
               </Text>
@@ -219,12 +220,12 @@ function FileTableView<T extends ExcelFile | JsonFile>({
       style={{
         backgroundColor: 'var(--ant-color-bg-container)',
       }}
-      onRow={(record) => ({
-        style: {
-          cursor: 'pointer',
-        },
-        onClick: () => onAction('view', record.name),
-      })}
+      // onRow={(record) => ({
+      //   style: {
+      //     cursor: 'pointer',
+      //   },
+      //   onClick: () => onAction('view', record),
+      // })}
     />
   );
 }

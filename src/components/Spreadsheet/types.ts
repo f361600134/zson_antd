@@ -1,5 +1,8 @@
 // Spreadsheet 模块的类型定义
-export interface ExcelFile {
+import {FileAction} from "./hooks/useFileActions.ts";
+
+//抽象类接口
+export interface File {
   id: string;
   name: string;
   createTime: string;
@@ -8,16 +11,15 @@ export interface ExcelFile {
   size: string;
 }
 
-export interface JsonFile {
-  id: string;
-  name: string;
-  createTime: string;
-  updateTime: string;
-  branch: string;
-  size: string;
+//Excel接口
+export type ExcelFile = File
+
+//Json文件接口
+export interface JsonFile extends File {
   type: 'config' | 'data' | 'schema';
 }
 
+//显示模式 表格/列表
 export type ViewMode = 'grid' | 'list';
 
 export interface FilterOptions {
@@ -28,5 +30,5 @@ export interface FilterOptions {
 export interface FileActionMenuProps {
   file: ExcelFile | JsonFile;
   //onPreview: (file: ExcelFile | JsonFile) => void;
-  onAction: (action: string, fileName: string) => void;
+  onAction: (action: FileAction, file: ExcelFile | JsonFile) => void;
 }
