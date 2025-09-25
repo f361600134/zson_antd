@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { NavigationPage } from '../types/navigation';
+import type { NavigationPage } from '../types';
 import { 
   getPageConfig, 
   canAccessPage, 
