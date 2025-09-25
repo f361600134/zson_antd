@@ -9,10 +9,13 @@ export interface File {
   updateTime: string;
   branch: string;
   size: string;
+  url: string;
 }
 
 //Excel接口
-export type ExcelFile = File
+export interface ExcelFile extends File{
+  type: 'excel';
+}
 
 //Json文件接口
 export interface JsonFile extends File {

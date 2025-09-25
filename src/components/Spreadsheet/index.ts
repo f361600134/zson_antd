@@ -20,7 +20,11 @@ export type{
 export {
   getJsonTypeColor,
   filterExcelFiles,
-  filterJsonFiles
+  filterJsonFiles,
+  downloadExcel,
+  downloadJson,
+  viewExcel,
+  viewJson,
 } from './utils';
 
 // 导出常量

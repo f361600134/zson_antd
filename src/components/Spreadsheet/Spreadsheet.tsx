@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {Card, Tabs} from 'antd';
 import {FileTextOutlined, FileExcelOutlined} from '@ant-design/icons';
-import type {ViewMode, FilterOptions} from './types';
+import type {ViewMode, FilterOptions, JsonFile, ExcelFile} from './types';
 import {useFileData} from './hooks/useFileData';
 import {useFileActions} from './hooks/useFileActions';
 import FileTab from './components/FileTab';
 import {useJsonViewer} from "./components/useJsonViewer.tsx";
+import {useExcelViewer} from "./components/useExcelViewer.tsx";
 
 const {TabPane} = Tabs;
 
@@ -29,7 +30,8 @@ const Spreadsheet: React.FC = () => {
 
 
     const { showJson, JsonModal } = useJsonViewer();
-    const { handleFileAction } = useFileActions({ showJson });
+    const { showExcel, ExcelModal } = useExcelViewer();
+    const { handleFileAction } = useFileActions({ showJson, showExcel });
 
     // 获取过滤后的文件数据
     const filteredExcelFiles = getFilteredFiles.excel(filterOptions);
@@ -50,7 +52,7 @@ const Spreadsheet: React.FC = () => {
                             emptyDescription="没有找到匹配的 Excel 文件"
                             onFilterChange={handleFilterChange}
                             onViewModeChange={setViewMode}
-                            onAction={(action, file) => handleFileAction(action, file, "excel")}
+                            onAction={(action, file) => handleFileAction(action, file as ExcelFile, "excel")}
                         />
                     </TabPane>
                     <TabPane tab={
@@ -65,12 +67,13 @@ const Spreadsheet: React.FC = () => {
                             emptyDescription="没有找到匹配的 JSON 文件"
                             onFilterChange={handleFilterChange}
                             onViewModeChange={setViewMode}
-                            onAction={(action, file) => handleFileAction(action, file, "json")}
+                            onAction={(action, file) => handleFileAction(action, file as JsonFile, "json")}
                         />
                     </TabPane>
                 </Tabs>
             </Card>
             {JsonModal}
+            {ExcelModal}
         </div>
     );
 };

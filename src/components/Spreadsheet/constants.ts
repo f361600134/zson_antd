@@ -11,7 +11,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-12-15 10:30:00',
     updateTime: '2025-01-10 14:20:00',
     branch: 'main',
-    size: '2.5MB'
+    size: '2.5MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '2',
@@ -19,7 +20,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-11-20 09:15:00',
     updateTime: '2025-01-08 16:45:00',
     branch: 'develop',
-    size: '1.8MB'
+    size: '1.8MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '3',
@@ -27,7 +29,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-12-01 11:00:00',
     updateTime: '2025-01-05 13:30:00',
     branch: 'main',
-    size: '3.2MB'
+    size: '3.2MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '4',
@@ -35,7 +38,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-10-15 14:20:00',
     updateTime: '2024-12-28 10:15:00',
     branch: 'feature/inventory',
-    size: '4.1MB'
+    size: '4.1MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '5',
@@ -43,7 +47,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-11-30 16:45:00',
     updateTime: '2025-01-03 09:20:00',
     branch: 'main',
-    size: '1.5MB'
+    size: '1.5MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '6',
@@ -51,7 +56,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-12-10 08:30:00',
     updateTime: '2025-01-07 15:10:00',
     branch: 'develop',
-    size: '2.8MB'
+    size: '2.8MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '7',
@@ -59,7 +65,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-12-10 08:30:00',
     updateTime: '2025-01-07 15:10:00',
     branch: 'develop',
-    size: '2.8MB'
+    size: '2.8MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '8',
@@ -67,7 +74,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-12-10 08:30:00',
     updateTime: '2025-01-07 15:10:00',
     branch: 'develop',
-    size: '2.8MB'
+    size: '2.8MB',
+    url: 'http://localhost:8080',
   },
   {
     id: '9',
@@ -75,7 +83,8 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     createTime: '2024-12-10 08:30:00',
     updateTime: '2024-01-07 15:10:00',
     branch: 'develop',
-    size: '2.8MB'
+    size: '2.8MB',
+    url: 'http://localhost:8080',
   }
 ];
 
@@ -88,7 +97,8 @@ export const MOCK_JSON_FILES: JsonFile[] = [
     updateTime: '2025-01-09 11:30:00',
     branch: 'main',
     size: '15KB',
-    type: 'config'
+    type: 'config',
+    url: 'http://localhost:8080',
   },
   {
     id: '2',
@@ -97,7 +107,8 @@ export const MOCK_JSON_FILES: JsonFile[] = [
     updateTime: '2025-01-05 16:45:00',
     branch: 'develop',
     size: '8KB',
-    type: 'schema'
+    type: 'schema',
+    url: 'http://localhost:8080',
   },
   {
     id: '3',
@@ -106,7 +117,8 @@ export const MOCK_JSON_FILES: JsonFile[] = [
     updateTime: '2025-01-08 13:20:00',
     branch: 'main',
     size: '125KB',
-    type: 'data'
+    type: 'data',
+    url: 'http://localhost:8080',
   },
   {
     id: '4',
@@ -115,13 +127,14 @@ export const MOCK_JSON_FILES: JsonFile[] = [
     updateTime: '2024-12-30 10:30:00',
     branch: 'feature/i18n',
     size: '45KB',
-    type: 'config'
+    type: 'config',
+    url: 'http://localhost:8080',
   }
 ];
 
 // 样式常量
 export const FILE_CARD_STYLE: React.CSSProperties = {
-  height: '120px', // 从180px减小到140px（约减小22%）
+  //height: '120px', // 从180px减小到140px（约减小22%）
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   position: 'relative',

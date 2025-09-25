@@ -72,7 +72,7 @@ const FileCard: React.FC<FileCardProps> = ({ file, icon, onAction }) => {
                 {(file.name)}
               </Paragraph>
 
-              <div style={{ fontSize: '10px', color: '#8c8c8c' }}>
+              <div style={{ fontSize: '11px', color: '#8c8c8c' }}>
                 <div style={{ marginBottom: '4px' }}>
                   {file.updateTime}
                 </div>
