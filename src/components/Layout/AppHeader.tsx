@@ -3,7 +3,6 @@ import { Layout, Dropdown, Typography, Space, Flex, Button } from 'antd';
 import {
   UserOutlined,
   SettingOutlined,
-  LogoutOutlined,
   MenuOutlined,
   LoginOutlined
 } from '@ant-design/icons';

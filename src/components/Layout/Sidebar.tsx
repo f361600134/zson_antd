@@ -109,17 +109,17 @@ const Sidebar: React.FC<SidebarProps> = ({
       style={layoutStyles.sider}
       trigger={null}
     >
-      {/* 用户信息显示 */}
-      {!collapsed && user && (
-        <div style={userInfoStyle}>
-          <div style={{ fontWeight: 500, marginBottom: '2px' }}>
-            {user.name}
-          </div>
-          <div>
-            {user.roles.includes('admin') ? '管理员' : '用户'}
-          </div>
-        </div>
-      )}
+      {/*/!* 用户信息显示 *!/*/}
+      {/*{!collapsed && user && (*/}
+      {/*  <div style={userInfoStyle}>*/}
+      {/*    <div style={{ fontWeight: 500, marginBottom: '2px' }}>*/}
+      {/*      {user.name}*/}
+      {/*    </div>*/}
+      {/*    <div>*/}
+      {/*      {user.roles.includes('admin') ? '管理员' : '用户'}*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*)}*/}
       
       <div style={workspaceSectionStyle}>
         {!collapsed ? (
