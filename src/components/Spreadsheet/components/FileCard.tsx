@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {Card, Typography, Tooltip} from 'antd';
-import type { ExcelFile } from '../types';
+import type {ExcelFile, JsonFile} from '../types';
 import { FILE_CARD_STYLE, FILE_CARD_HOVER_STYLE } from '../constants';
 import FileActionMenu from './FileActionMenu';
 import {useThemeStore} from "../../../store/themeStore.ts";
@@ -10,7 +10,7 @@ const { Paragraph } = Typography;
 interface FileCardProps {
   file: ExcelFile;
   icon: ReactNode,
-  onAction: (action: FileAction, file: ExcelFile) => void;
+  onAction: (action: FileAction, file: ExcelFile | JsonFile) => void;
 }
 
 const FileCard: React.FC<FileCardProps> = ({ file, icon, onAction }) => {

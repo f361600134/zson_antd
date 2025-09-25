@@ -13,6 +13,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'main',
     size: '2.5MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '2',
@@ -22,6 +23,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'develop',
     size: '1.8MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '3',
@@ -31,6 +33,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'main',
     size: '3.2MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '4',
@@ -40,6 +43,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'feature/inventory',
     size: '4.1MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '5',
@@ -49,6 +53,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'main',
     size: '1.5MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '6',
@@ -58,6 +63,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'develop',
     size: '2.8MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '7',
@@ -67,6 +73,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'develop',
     size: '2.8MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '8',
@@ -76,6 +83,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'develop',
     size: '2.8MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   },
   {
     id: '9',
@@ -85,6 +93,7 @@ export const MOCK_EXCEL_FILES: ExcelFile[] = [
     branch: 'develop',
     size: '2.8MB',
     url: 'http://localhost:8080',
+    type: 'excel',
   }
 ];
 

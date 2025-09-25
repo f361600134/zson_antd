@@ -41,8 +41,8 @@ export const useExcelViewer = () => {
     };
 
     // 窗口留边距，设最大宽高
-    const modalWidth = Math.min(vw - 100, 1600);
-    const modalBodyHeight = Math.min(vh - 180, 1000);
+    const modalWidth = Math.min(vw - 80, 1600);
+    const modalBodyHeight = Math.min(vh - 170, 1000);
 
     const onDownload = () => {
         if (!file?.url) {
@@ -61,7 +61,9 @@ export const useExcelViewer = () => {
             onCancel={() => setOpen(false)}
             title={file ? `Excel 预览 - ${file.name}` : 'Excel 预览'}
             width={modalWidth}
-            style={{ top: 40 ,padding: 0, height: modalBodyHeight }}
+            style={{ top: 40 }}
+            styles={{body:{ padding: 0, height: modalBodyHeight }}}
+            //bodyStyle={{ padding: 0, height: modalBodyHeight }}
             // 关键：等 Modal 完全打开/关闭后再挂载/卸载 Spreadsheet
             afterOpenChange={(visible) => {
                 if (visible) {
