@@ -138,7 +138,7 @@ export const FILE_CARD_STYLE: React.CSSProperties = {
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   position: 'relative',
-  overflow: 'hidden'
+  overflow: 'hidden',
 };
 
 export const FILE_CARD_HOVER_STYLE: React.CSSProperties = {

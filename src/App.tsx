@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider, theme, App as AntdApp } from 'antd';
 import AppLayout from './components/Layout/AppLayout';
 import Dashboard from './components/Dashboard/Dashboard';
 import { useThemeStore } from './store/themeStore';
@@ -96,13 +96,13 @@ function App() {
   }
 
   return (
-    <ConfigProvider
-      theme={antdTheme}
-    >
-      <AppLayout userRoles={userRoles}>
-        <Dashboard />
-      </AppLayout>
-    </ConfigProvider>
+      <ConfigProvider theme={antdTheme}>
+        <AntdApp>
+          <AppLayout userRoles={userRoles}>
+            <Dashboard />
+          </AppLayout>
+        </AntdApp>
+      </ConfigProvider>
   );
 }
 

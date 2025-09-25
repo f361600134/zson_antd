@@ -8,8 +8,6 @@ import FileTab from './components/FileTab';
 import {useJsonViewer} from "./components/useJsonViewer.tsx";
 import {useExcelViewer} from "./components/useExcelViewer.tsx";
 
-const {TabPane} = Tabs;
-
 const Spreadsheet: React.FC = () => {
     // 状态管理
     const [activeTab, setActiveTab] = useState('excel');
@@ -29,9 +27,9 @@ const Spreadsheet: React.FC = () => {
     };
 
 
-    const { showJson, JsonModal } = useJsonViewer();
-    const { showExcel, ExcelModal } = useExcelViewer();
-    const { handleFileAction } = useFileActions({ showJson, showExcel });
+    const {showJson, JsonModal} = useJsonViewer();
+    const {showExcel, ExcelModal} = useExcelViewer();
+    const {handleFileAction} = useFileActions({showJson, showExcel});
 
     // 获取过滤后的文件数据
     const filteredExcelFiles = getFilteredFiles.excel(filterOptions);
@@ -40,37 +38,50 @@ const Spreadsheet: React.FC = () => {
     return (
         <div>
             <Card>
-                <Tabs activeKey={activeTab} onChange={setActiveTab}  size="large" >
-                    <TabPane tab={
-                        <span> <FileExcelOutlined/> EXCEL </span>
-                    } key="excel">
-                        <FileTab
-                            files={filteredExcelFiles}
-                            fileType="excel"
-                            filterOptions={filterOptions}
-                            viewMode={viewMode}
-                            emptyDescription="没有找到匹配的 Excel 文件"
-                            onFilterChange={handleFilterChange}
-                            onViewModeChange={setViewMode}
-                            onAction={(action, file) => handleFileAction(action, file as ExcelFile, "excel")}
-                        />
-                    </TabPane>
-                    <TabPane tab={
-                        <span><FileTextOutlined/>JSON</span>
-                        }
-                        key="json">
-                        <FileTab
-                            files={filteredJsonFiles}
-                            fileType="json"
-                            filterOptions={filterOptions}
-                            viewMode={viewMode}
-                            emptyDescription="没有找到匹配的 JSON 文件"
-                            onFilterChange={handleFilterChange}
-                            onViewModeChange={setViewMode}
-                            onAction={(action, file) => handleFileAction(action, file as JsonFile, "json")}
-                        />
-                    </TabPane>
-                </Tabs>
+                <Tabs
+                    activeKey={activeTab}
+                    onChange={setActiveTab}
+                    size="large"
+                    items={[
+                        {
+                            key: 'excel',
+                            label: (<span> <FileExcelOutlined/> EXCEL</span>),
+                            children: (
+                                <FileTab
+                                    files={filteredExcelFiles}
+                                    fileType="excel"
+                                    filterOptions={filterOptions}
+                                    viewMode={viewMode}
+                                    emptyDescription="没有找到匹配的 Excel 文件"
+                                    onFilterChange={handleFilterChange}
+                                    onViewModeChange={setViewMode}
+                                    onAction={(action, file) =>
+                                        handleFileAction(action, file as ExcelFile, 'excel')
+                                    }
+                                />
+                            ),
+                        },
+                        {
+                            key: 'json',
+                            label: (<span><FileTextOutlined/> JSON</span>),
+                            children: (
+                                <FileTab
+                                    files={filteredJsonFiles}
+                                    fileType="json"
+                                    filterOptions={filterOptions}
+                                    viewMode={viewMode}
+                                    emptyDescription="没有找到匹配的 JSON 文件"
+                                    onFilterChange={handleFilterChange}
+                                    onViewModeChange={setViewMode}
+                                    onAction={(action, file) =>
+                                        handleFileAction(action, file as JsonFile, 'json')
+                                    }
+                                />
+                            ),
+                        },
+                    ]}
+                />
+
             </Card>
             {JsonModal}
             {ExcelModal}

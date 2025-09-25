@@ -61,9 +61,7 @@ export const useExcelViewer = () => {
             onCancel={() => setOpen(false)}
             title={file ? `Excel 预览 - ${file.name}` : 'Excel 预览'}
             width={modalWidth}
-            style={{ top: 40 }}
-            bodyStyle={{ padding: 0, height: modalBodyHeight }}
-            destroyOnClose
+            style={{ top: 40 ,padding: 0, height: modalBodyHeight }}
             // 关键：等 Modal 完全打开/关闭后再挂载/卸载 Spreadsheet
             afterOpenChange={(visible) => {
                 if (visible) {

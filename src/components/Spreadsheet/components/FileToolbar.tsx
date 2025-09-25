@@ -59,24 +59,23 @@ const FileToolbar: React.FC<FileToolbarProps> = ({
         </Select>
       </Space>
 
-      <Space>
-        <Button.Group>
-          <Button
+      <Space.Compact>
+        <Button
             type={viewMode === 'grid' ? 'primary' : 'default'}
             icon={<AppstoreOutlined />}
             onClick={() => onViewModeChange('grid')}
-          >
-            网格
-          </Button>
-          <Button
+        >
+          网格
+        </Button>
+        <Button
             type={viewMode === 'list' ? 'primary' : 'default'}
             icon={<TableOutlined />}
             onClick={() => onViewModeChange('list')}
-          >
-            表格
-          </Button>
-        </Button.Group>
-      </Space>
+        >
+          表格
+        </Button>
+      </Space.Compact>
+
     </div>
   );
 };

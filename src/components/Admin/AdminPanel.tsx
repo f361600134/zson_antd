@@ -318,6 +318,7 @@ const AdminPanel: React.FC = () => {
       {/* Main Content */}
       <Card>
         <Tabs activeKey={activeTab} onChange={setActiveTab}>
+          {/*使用Tabs中的items替代*/}
           <TabPane tab="User Management" key="users" icon={<TeamOutlined />}>
             <div style={{ marginBottom: '16px' }}>
               <Button 

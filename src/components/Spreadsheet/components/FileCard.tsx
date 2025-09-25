@@ -42,12 +42,13 @@ const FileCard: React.FC<FileCardProps> = ({ file, icon, onAction }) => {
       <Tooltip title={file.name} placement={"bottom"}>
         <Card
             style={FILE_CARD_STYLE}
-            bodyStyle={{
-              padding: '12px',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column'
-            }}
+            styles={{
+              body:{
+                padding: '12px',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column'
+              }}}
             className="file-card"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
