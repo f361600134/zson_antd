@@ -40,6 +40,7 @@ import {
 } from '@ant-design/icons';
 import { useThemeStore } from '../../store/themeStore';
 import { useTranslation } from '../../utils/i18n';
+import { useRoleCheck } from '../../hooks';
 import type { ColumnsType } from 'antd/es/table';
 
 const { Title, Text } = Typography;
@@ -74,6 +75,7 @@ interface Team {
 const TeamManagement: React.FC = () => {
   const { themeConfig } = useThemeStore();
   const { t } = useTranslation(themeConfig.language);
+  const { hasRequiredAccess } = useRoleCheck(['admin', 'manager']);
   const [activeTab, setActiveTab] = useState('members');
   const [memberModalVisible, setMemberModalVisible] = useState(false);
   const [teamModalVisible, setTeamModalVisible] = useState(false);
@@ -451,6 +453,19 @@ const TeamManagement: React.FC = () => {
   const pendingMembers = members.filter(m => m.status === 'pending').length;
   const totalProjects = members.reduce((sum, m) => sum + m.projectsCount, 0);
   const totalTasks = members.reduce((sum, m) => sum + m.tasksCompleted, 0);
+
+  // 权限检查
+  if (!hasRequiredAccess) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px 0' }}>
+        <div style={{ fontSize: '48px', marginBottom: 16, color: '#ff4d4f' }}>
+          🚫
+        </div>
+        <h3 style={{ fontSize: 20, color: '#ff4d4f' }}>访问被拒绝</h3>
+        <p style={{ color: '#8c8c8c' }}>您没有权限访问团队管理功能</p>
+      </div>
+    );
+  }
 
   return (
     <div>

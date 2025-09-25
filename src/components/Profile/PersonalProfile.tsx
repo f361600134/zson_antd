@@ -27,6 +27,7 @@ import {
   CloseOutlined
 } from '@ant-design/icons';
 import { useThemeStore } from '../../store/themeStore';
+import { useAuthStore } from '../../store/authStore';
 import dayjs from 'dayjs';
 
 const { Title, Text } = Typography;
@@ -52,21 +53,26 @@ interface UserProfile {
 
 const PersonalProfile: React.FC = () => {
   const { themeConfig } = useThemeStore();
+  const { user: currentUser } = useAuthStore();
   const [form] = Form.useForm();
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    name: 'Admin User',
-    email: 'admin@company.com',
+    name: currentUser?.name || 'User',
+    email: currentUser?.email || 'user@example.com',
     phone: '+1 (555) 123-4567',
     department: 'Technology',
-    position: 'System Administrator',
+    position: currentUser?.roles.includes('admin') ? 'System Administrator' : 'Team Member',
     location: 'San Francisco, CA',
-    bio: 'Experienced system administrator with over 8 years in enterprise software management and team leadership.',
+    bio: currentUser?.roles.includes('admin') 
+      ? 'Experienced system administrator with over 8 years in enterprise software management and team leadership.'
+      : 'Dedicated team member focused on delivering quality results and continuous learning.',
     joinDate: '2020-03-15',
     avatar: '',
-    skills: ['System Administration', 'Team Management', 'Cloud Computing', 'Security'],
+    skills: currentUser?.roles.includes('admin') 
+      ? ['System Administration', 'Team Management', 'Cloud Computing', 'Security']
+      : ['Project Management', 'Communication', 'Problem Solving', 'Teamwork'],
     notifications: {
       email: true,
       push: true,

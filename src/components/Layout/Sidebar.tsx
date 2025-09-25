@@ -5,6 +5,7 @@ import {
   DownOutlined
 } from '@ant-design/icons';
 import { useWorkspaceStore } from '../../store/workspaceStore';
+import { useAuthStore } from '../../store/authStore';
 import { useThemeStyles } from '../../hooks';
 import { usePageRouter } from '../../hooks/usePageRouter';
 import type { MenuProps } from 'antd';
@@ -28,6 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   userRoles = []
 }) => {
   const { currentWorkspace, workspaces, setCurrentWorkspace } = useWorkspaceStore();
+  const { user } = useAuthStore();
   const { layoutStyles, themeConfig } = useThemeStyles();
   const { canAccess } = usePageRouter({ userRoles });
 
@@ -91,6 +93,14 @@ const Sidebar: React.FC<SidebarProps> = ({
     color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280'
   };
 
+  // 显示当前用户信息
+  const userInfoStyle: React.CSSProperties = {
+    padding: '8px 16px',
+    borderBottom: `1px solid ${themeConfig.themeMode === 'dark' ? '#303030' : '#e5e7eb'}`,
+    fontSize: '12px',
+    color: themeConfig.themeMode === 'dark' ? '#8c8c8c' : '#6b7280'
+  };
+
   return (
     <Sider
       collapsible
@@ -99,6 +109,18 @@ const Sidebar: React.FC<SidebarProps> = ({
       style={layoutStyles.sider}
       trigger={null}
     >
+      {/* 用户信息显示 */}
+      {!collapsed && user && (
+        <div style={userInfoStyle}>
+          <div style={{ fontWeight: 500, marginBottom: '2px' }}>
+            {user.name}
+          </div>
+          <div>
+            {user.roles.includes('admin') ? '管理员' : '用户'}
+          </div>
+        </div>
+      )}
+      
       <div style={workspaceSectionStyle}>
         {!collapsed ? (
           <div>

@@ -1,13 +1,16 @@
 import { ConfigProvider, theme } from 'antd';
 import AppLayout from './components/Layout/AppLayout';
 import Dashboard from './components/Dashboard/Dashboard';
+import { AuthGuard } from './components/Auth';
 import { useThemeStore } from './store/themeStore';
+import { useAuthStore } from './store/authStore';
 
 function App() {
   const { themeConfig } = useThemeStore();
+  const { user } = useAuthStore();
 
-  // 模拟用户角色（在实际应用中，这应该来自认证系统）
-  const userRoles = ['user', 'admin']; // 可以根据实际登录用户动态设置
+  // 从认证状态获取用户角色
+  const userRoles = user?.roles || ['user'];
 
   // 获取主题特定的颜色配置
   const getThemeColors = () => {
@@ -99,9 +102,11 @@ function App() {
     <ConfigProvider
       theme={antdTheme}
     >
-      <AppLayout userRoles={userRoles}>
-        <Dashboard />
-      </AppLayout>
+      <AuthGuard>
+        <AppLayout userRoles={userRoles}>
+          <Dashboard />
+        </AppLayout>
+      </AuthGuard>
     </ConfigProvider>
   );
 }
