@@ -12,6 +12,10 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.2",
     "@supabase/supabase-js": "^2.57.4",
+    "@syncfusion/ej2-base": "^31.1.20",
+    "@syncfusion/ej2-excel-export": "^31.1.17",
+    "@syncfusion/ej2-file-utils": "^31.1.17",
+    "@syncfusion/ej2-react-spreadsheet": "^31.1.21",
     "antd": "^5.27.4",
     "dayjs": "^1.11.18",
     "lucide-react": "^0.344.0",

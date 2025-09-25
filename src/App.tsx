@@ -84,7 +84,7 @@ function App() {
         // Statistic 组件会自动使用 colorPrimary
         titleFontSize: 14,
         contentFontSize: 24,
-      }
+      },
     }
   };
 
