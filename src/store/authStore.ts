@@ -1,5 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create, StateCreator } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import authService from "../services/api/authService.ts";
 
 export interface User {
   id: string;
@@ -17,98 +18,83 @@ export interface LoginCredentials {
 interface AuthState {
   user: User | null;
   token: string | null;
+  refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: LoginCredentials) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   checkAuth: () => boolean;
   setLoading: (loading: boolean) => void;
 }
 
-// 模拟API调用
-const mockLogin = async (credentials: LoginCredentials): Promise<{ user: User; token: string }> => {
-  // 模拟网络延迟
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  // 简单的模拟验证
-  if (credentials.email === 'admin@company.com' && credentials.password === 'admin123') {
-    return {
-      user: {
-        id: '1',
-        name: 'Admin User',
-        email: 'admin@company.com',
-        roles: ['admin', 'user']
-      },
-      token: 'mock-jwt-token-admin'
-    };
-  } else if (credentials.email === 'user@company.com' && credentials.password === 'user123') {
-    return {
-      user: {
-        id: '2',
-        name: 'Regular User',
-        email: 'user@company.com',
-        roles: ['user']
-      },
-      token: 'mock-jwt-token-user'
-    };
-  } else {
-    throw new Error('Invalid email or password');
-  }
-};
+const authStoreCreator: StateCreator<AuthState> = (set, get) => ({
+  user: null,
+  token: null,
+  refreshToken: null,
+  isAuthenticated: false,
+  isLoading: false,
+
+  login: async (credentials: LoginCredentials) => {
+    set({ isLoading: true });
+    try {
+      const res = await authService.login(credentials);
+      set({
+        // user: res.user,
+        user: {
+          id: '1',
+          name: 'Admin User',
+          email: 'admin@company.com',
+          roles: ['admin', 'user']
+        },
+        token: res.accessToken,
+        refreshToken: res.refreshToken,
+        isAuthenticated: true,
+        isLoading: false,
+      });
+    } catch (error) {
+      set({ isLoading: false });
+      throw error;
+    }
+  },
+
+  logout: async () => {
+    try {
+      await authService.logout();
+    } finally {
+      set({
+        user: null,
+        token: null,
+        refreshToken: null,
+        isAuthenticated: false,
+        isLoading: false,
+      });
+    }
+  },
+
+  checkAuth: () => {
+    const { token, user } = get();
+    const isValid = !!(token && user);
+    if (isValid !== get().isAuthenticated) {
+      set({ isAuthenticated: isValid });
+    }
+    return isValid;
+  },
+
+  setLoading: (loading: boolean) => set({ isLoading: loading }),
+});
 
 export const useAuthStore = create<AuthState>()(
-  persist(
-    (set, get) => ({
-      user: null,
-      token: null,
-      isAuthenticated: false,
-      isLoading: false,
-
-      login: async (credentials: LoginCredentials) => {
-        set({ isLoading: true });
-        try {
-          const { user, token } = await mockLogin(credentials);
-          set({
-            user,
-            token,
-            isAuthenticated: true,
-            isLoading: false
-          });
-        } catch (error) {
-          set({ isLoading: false });
-          throw error;
+    persist(
+        authStoreCreator,
+        {
+          name: 'auth-storage',
+          storage: createJSONStorage(() => localStorage),
+          partialize: (state): Partial<AuthState> => ({
+            user: state.user,
+            token: state.token,
+            refreshToken: state.refreshToken,
+            isAuthenticated: state.isAuthenticated,
+          }),
         }
-      },
-
-      logout: () => {
-        set({
-          user: null,
-          token: null,
-          isAuthenticated: false,
-          isLoading: false
-        });
-      },
-
-      checkAuth: () => {
-        const { token, user } = get();
-        const isValid = !!(token && user);
-        if (isValid !== get().isAuthenticated) {
-          set({ isAuthenticated: isValid });
-        }
-        return isValid;
-      },
-
-      setLoading: (loading: boolean) => {
-        set({ isLoading: loading });
-      }
-    }),
-    {
-      name: 'auth-storage',
-      partialize: (state) => ({
-        user: state.user,
-        token: state.token,
-        isAuthenticated: state.isAuthenticated
-      })
-    }
-  )
+    )
 );

@@ -1,27 +1,27 @@
-import axios from 'axios';
-import AxiosInstance = Axios.AxiosInstance;
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError  } from 'axios';
+import type { InternalAxiosRequestConfig } from 'axios';
 
 // API 基础配置
 const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
+  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://10.19.216.210:5050/zson',
   TIMEOUT: 10000, // 10秒超时
   RETRY_ATTEMPTS: 3,
   RETRY_DELAY: 1000, // 1秒重试间隔
 };
 
 // 请求/响应接口定义
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T> {
   code: number;
   message: string;
   data: T;
-  success: boolean;
-  timestamp?: string;
+  // success: boolean;
+  // timestamp?: string;
 }
 
 export interface ApiError {
   code: number;
   message: string;
-  details?: any;
+  details?: unknown;
 }
 
 // 请求配置扩展
@@ -51,7 +51,7 @@ class HttpClient {
   private setupInterceptors() {
     // 请求拦截器
     this.axiosInstance.interceptors.request.use(
-      (config) => {
+      (config : InternalAxiosRequestConfig ) : InternalAxiosRequestConfig  => {
         return this.handleRequest(config);
       },
       (error) => {
@@ -70,19 +70,20 @@ class HttpClient {
     );
   }
 
-  private handleRequest(config: AxiosRequestConfig): AxiosRequestConfig {
+  private handleRequest(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig {
     const token = this.getAuthToken();
     const customConfig = config as RequestConfig;
 
-    // 添加认证头
     if (token && !customConfig.skipAuth) {
-      config.headers = {
-        ...config.headers,
-        Authorization: `Bearer ${token}`,
-      };
+    //   config.headers = {
+    //     ...config.headers,
+    //     Authorization: `Bearer ${token}`,
+    //   };
+    if (config.headers) {
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
+  }
 
-    // 添加请求ID用于取消重复请求
     const requestId = this.generateRequestId(config);
     if (this.requestQueue.has(requestId)) {
       this.requestQueue.get(requestId)?.abort();
@@ -92,9 +93,8 @@ class HttpClient {
     this.requestQueue.set(requestId, controller);
     config.signal = controller.signal;
 
-    // 请求日志
     if (import.meta.env.DEV) {
-      console.log(`🚀 API Request: ${config.method?.toUpperCase()} ${config.url}`, {
+      console.log(` API Request: ${config.method?.toUpperCase()} ${config.url}`, {
         headers: config.headers,
         data: config.data,
         params: config.params,
@@ -110,9 +110,9 @@ class HttpClient {
 
     // 响应日志
     if (import.meta.env.DEV) {
-      console.log(`✅ API Response: ${response.config.method?.toUpperCase()} ${response.config.url}`, {
+      console.log(`✅ Sending Success: ${response.config.method?.toUpperCase()} ${response.config.url}`, {
         status: response.status,
-        data: response.data,
+        response: response.data,
       });
     }
 
@@ -152,7 +152,7 @@ class HttpClient {
       const { status, data } = error.response;
       return {
         code: status,
-        message: data?.message || error.message,
+        message: error.message,
         details: data,
       };
     }
@@ -213,33 +213,33 @@ class HttpClient {
   }
 
   // 公共请求方法
-  public async get<T = any>(url: string, config?: RequestConfig): Promise<ApiResponse<T>> {
+  public async get<T = unknown>(url: string, config?: RequestConfig): Promise<ApiResponse<T>> {
     const response = await this.retryRequest({ ...config, method: 'GET', url });
     return response.data;
   }
 
-  public async post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<ApiResponse<T>> {
+  public async post<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<ApiResponse<T>> {
     const response = await this.retryRequest({ ...config, method: 'POST', url, data });
     return response.data;
   }
 
-  public async put<T = any>(url: string, data?: any, config?: RequestConfig): Promise<ApiResponse<T>> {
+  public async put<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<ApiResponse<T>> {
     const response = await this.retryRequest({ ...config, method: 'PUT', url, data });
     return response.data;
   }
 
-  public async patch<T = any>(url: string, data?: any, config?: RequestConfig): Promise<ApiResponse<T>> {
+  public async patch<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<ApiResponse<T>> {
     const response = await this.retryRequest({ ...config, method: 'PATCH', url, data });
     return response.data;
   }
 
-  public async delete<T = any>(url: string, config?: RequestConfig): Promise<ApiResponse<T>> {
+  public async delete<T = unknown>(url: string, config?: RequestConfig): Promise<ApiResponse<T>> {
     const response = await this.retryRequest({ ...config, method: 'DELETE', url });
     return response.data;
   }
 
   // 上传文件
-  public async upload<T = any>(url: string, file: File, onProgress?: (progress: number) => void, config?: RequestConfig): Promise<ApiResponse<T>> {
+  public async upload<T = unknown>(url: string, file: File, onProgress?: (progress: number) => void, config?: RequestConfig): Promise<ApiResponse<T>> {
     const formData = new FormData();
     formData.append('file', file);
 

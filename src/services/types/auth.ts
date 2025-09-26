@@ -10,7 +10,7 @@ export interface LoginResponse {
   user: User;
   accessToken: string;
   refreshToken: string;
-  expiresIn: number;
+  expiresAt: number;
   tokenType: string;
 }
 
