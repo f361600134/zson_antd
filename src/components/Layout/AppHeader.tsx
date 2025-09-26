@@ -3,10 +3,11 @@ import { Layout, Dropdown, Typography, Space, Flex, Button } from 'antd';
 import {
   UserOutlined,
   SettingOutlined,
-  LogoutOutlined,
-  MenuOutlined
+  MenuOutlined,
+  LoginOutlined
 } from '@ant-design/icons';
 import { useWorkspaceStore } from '../../store/workspaceStore';
+import { useAuthStore } from '../../store/authStore';
 import { useThemeStyles } from '../../hooks';
 import type { MenuProps } from 'antd';
 import type { NavigationPage } from '../../types';
@@ -25,6 +26,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   onNavigate 
 }) => {
   const { currentWorkspace } = useWorkspaceStore();
+  const { user, logout } = useAuthStore();
   const { layoutStyles, themeConfig } = useThemeStyles();
 
   //Header中的用户头像
@@ -53,8 +55,11 @@ const AppHeader: React.FC<AppHeaderProps> = ({
     {
       key: 'logout',
       label: 'Logout',
-      icon: <LogoutOutlined />,
-      onClick: () => console.log('Logout clicked'),
+      icon: <LoginOutlined />,
+      onClick: () => {
+        logout();
+        window.location.reload(); // 刷新页面回到登录状态
+      },
       danger: true
     }
   ];
@@ -106,7 +111,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({
         >
           <div className="admin-dropdown-trigger">
             <Space size={12} align="center">
-              <UserAvatar name='Admin User' email = 'admin@company.com' />
+              <UserAvatar 
+                name={user?.name || 'User'} 
+                email={user?.email || 'user@example.com'} 
+              />
             </Space>
           </div>
         </Dropdown>

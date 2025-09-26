@@ -1,0 +1,110 @@
+/* Colorful Theme Styles */
+
+/* Dashboard Cards */
+.dashboard-card.colorful {
+  background: linear-gradient(135deg, var(--colorful-bg-primary) 0%, var(--colorful-bg-secondary) 100%);
+  border: 1px solid var(--colorful-border);
+  box-shadow: var(--shadow-colorful);
+  position: relative;
+}
+
+.dashboard-card.colorful::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--colorful-primary) 0%, var(--colorful-secondary) 50%, #D6D3D1 100%);
+  border-radius: 6px 6px 0 0;
+}
+
+/* Table Styles */
+.dashboard-table.colorful .ant-table-thead > tr > th {
+  background: linear-gradient(135deg, var(--colorful-bg-primary) 0%, var(--colorful-bg-secondary) 100%);
+  border-bottom: 2px solid var(--colorful-border);
+}
+
+.dashboard-table.colorful .ant-table-tbody > tr:hover > td {
+  background: var(--colorful-bg-primary) !important;
+}
+
+/* Sidebar Menu */
+.colorful .ant-menu-item-selected {
+  background: linear-gradient(90deg, var(--colorful-bg-primary) 0%, var(--colorful-bg-secondary) 100%) !important;
+  border-right: 3px solid var(--colorful-primary) !important;
+}
+
+/* Background Pattern */
+.elegant-bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(139, 90, 107, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(168, 162, 158, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(245, 243, 240, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Elements */
+.elegant-floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-element {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0.12;
+  color: var(--colorful-primary);
+  z-index: 1;
+}
+
+.element-1 {
+  top: 15%;
+  left: 20%;
+  animation: float-elegant 8s ease-in-out infinite;
+}
+
+.element-2 {
+  top: 40%;
+  right: 25%;
+  animation: float-elegant 10s ease-in-out infinite reverse;
+}
+
+.element-3 {
+  bottom: 30%;
+  left: 15%;
+  animation: float-elegant 12s ease-in-out infinite;
+}
+
+.floating-accent {
+  position: absolute;
+  top: 70%;
+  right: 10%;
+  font-size: 18px;
+  opacity: 0.1;
+  color: var(--colorful-secondary);
+  animation: pulse-elegant 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes float-elegant {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) translateX(8px) rotate(3deg); }
+  66% { transform: translateY(-3px) translateX(-3px) rotate(-2deg); }
+}
+
+@keyframes pulse-elegant {
+  0%, 100% { transform: scale(1); opacity: 0.05; }
+  50% { transform: scale(1.1); opacity: 0.08; }
+}

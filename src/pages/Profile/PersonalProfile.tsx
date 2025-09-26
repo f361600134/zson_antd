@@ -121,25 +121,6 @@ const PersonalProfile: React.FC = () => {
     marginBottom: '24px'
   };
 
-  const cardStyle: React.CSSProperties = {
-    marginBottom: '24px',
-    ...(themeConfig.presetTheme === 'compact' && {
-      background: 'linear-gradient(135deg, #FEFEFE 0%, #F8F9FA 100%)',
-      border: '1px solid #E5E7EB',
-      boxShadow: '0 4px 12px rgba(27, 77, 62, 0.08)'
-    }),
-    ...(themeConfig.presetTheme === 'colorful' && {
-      background: 'linear-gradient(135deg, #FAF9F7 0%, #F5F3F0 100%)',
-      border: '1px solid #E7E5E4',
-      boxShadow: '0 4px 12px rgba(139, 90, 107, 0.08)'
-    }),
-    ...(themeConfig.presetTheme === 'luxury' && {
-      background: 'linear-gradient(135deg, #1F1F1F 0%, #2A2A2A 100%)',
-      border: '1px solid #333333',
-      boxShadow: '0 8px 32px rgba(255, 215, 0, 0.15)'
-    })
-  };
-
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
@@ -151,7 +132,7 @@ const PersonalProfile: React.FC = () => {
 
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={8}>
-          <Card style={cardStyle}>
+          <Card>
             <div style={{ textAlign: 'center' }}>
               <Avatar 
                 size={120} 
@@ -206,7 +187,7 @@ const PersonalProfile: React.FC = () => {
             </div>
           </Card>
 
-          <Card title="Skills" style={cardStyle}>
+          <Card title="Skills" style={{ marginTop: '24px' }}>
             <Space wrap>
               {userProfile.skills.map((skill, index) => (
                 <Tag 
@@ -225,7 +206,6 @@ const PersonalProfile: React.FC = () => {
         <Col xs={24} lg={16}>
           <Card 
             title="Profile Information"
-            style={cardStyle}
             extra={
               !editing ? (
                 <Button 
@@ -355,7 +335,7 @@ const PersonalProfile: React.FC = () => {
             </Form>
           </Card>
 
-          <Card title="Notification Settings" style={cardStyle}>
+          <Card title="Notification Settings" style={{ marginTop: '24px' }}>
             <Form layout="vertical">
               <Row gutter={16}>
                 <Col xs={24} sm={8}>

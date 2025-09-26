@@ -18,7 +18,6 @@ import {
   message,
   Tabs,
   Switch,
-  DatePicker,
   Progress
 } from 'antd';
 import { 
@@ -33,10 +32,10 @@ import {
   SecurityScanOutlined,
   BugOutlined
 } from '@ant-design/icons';
-import { useThemeStore } from '../../store/themeStore';
+import { useRoleCheck } from '../../hooks';
 import type { ColumnsType } from 'antd/es/table';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 const { TabPane } = Tabs;
 
 interface User {
@@ -58,7 +57,7 @@ interface SystemLog {
 }
 
 const AdminPanel: React.FC = () => {
-  const { themeConfig } = useThemeStore();
+  const { hasRequiredAccess } = useRoleCheck(['admin', 'superadmin']);
   const [activeTab, setActiveTab] = useState('users');
   const [userModalVisible, setUserModalVisible] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -255,7 +254,7 @@ const AdminPanel: React.FC = () => {
     message.success(`User ${userId} deleted successfully`);
   };
 
-  const handleUserSubmit = (values: any) => {
+  const handleUserSubmit = (values: never) => {
     if (editingUser) {
       message.success('User updated successfully');
     } else {
@@ -265,6 +264,19 @@ const AdminPanel: React.FC = () => {
     setEditingUser(null);
     form.resetFields();
   };
+
+  // 权限检查
+  if (!hasRequiredAccess) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px 0' }}>
+        <div style={{ fontSize: '48px', marginBottom: 16, color: '#ff4d4f' }}>
+          🚫
+        </div>
+        <h3 style={{ fontSize: 20, color: '#ff4d4f' }}>访问被拒绝</h3>
+        <p style={{ color: '#8c8c8c' }}>您没有权限访问管理员面板</p>
+      </div>
+    );
+  }
 
   return (
     <div>
