@@ -1,9 +1,9 @@
 import { ConfigProvider, theme } from 'antd';
 import AppLayout from './components/Layout/AppLayout';
-import Dashboard from './components/Dashboard/Dashboard';
 import { AuthGuard } from './components/Auth';
 import { useThemeStore } from './store/themeStore';
 import { useAuthStore } from './store/authStore';
+import {Dashboard} from "./pages";
 
 function App() {
   const { themeConfig } = useThemeStore();

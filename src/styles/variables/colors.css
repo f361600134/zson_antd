@@ -1,0 +1,68 @@
+/* CSS Variables - Colors System */
+:root {
+  /* Brand Colors */
+  --brand-primary: #1B4D3E;
+  --brand-secondary: #9CA3AF;
+  --brand-accent: #E5E7EB;
+  
+  /* Functional Colors */
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #ff4d4f;
+  --color-info: #1677ff;
+  
+  /* Text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #8c8c8c;
+  --text-disabled: #d9d9d9;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f4;
+  
+  /* Border Colors */
+  --border-primary: #d9d9d9;
+  --border-secondary: #e5e7eb;
+  --border-tertiary: #f0f0f0;
+  
+  /* Theme Colors - Compact */
+  --compact-primary: #1B4D3E;
+  --compact-secondary: #9CA3AF;
+  --compact-bg-primary: #FEFEFE;
+  --compact-bg-secondary: #F8F9FA;
+  --compact-border: #E5E7EB;
+  --compact-shadow: rgba(27, 77, 62, 0.08);
+  
+  /* Theme Colors - Colorful */
+  --colorful-primary: #8B5A6B;
+  --colorful-secondary: #A8A29E;
+  --colorful-bg-primary: #FAF9F7;
+  --colorful-bg-secondary: #F5F3F0;
+  --colorful-border: #E7E5E4;
+  --colorful-shadow: rgba(139, 90, 107, 0.08);
+  
+  /* Theme Colors - Luxury */
+  --luxury-gold: #FFD700;
+  --luxury-gold-alt: #D4AF37;
+  --luxury-bg-primary: #1F1F1F;
+  --luxury-bg-secondary: #2A2A2A;
+  --luxury-border: #333333;
+  --luxury-shadow: rgba(255, 215, 0, 0.15);
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+  --text-primary: #ffffff;
+  --text-secondary: #d9d9d9;
+  --text-tertiary: #8c8c8c;
+  
+  --bg-primary: #141414;
+  --bg-secondary: #1f1f1f;
+  --bg-tertiary: #262626;
+  
+  --border-primary: #434343;
+  --border-secondary: #303030;
+  --border-tertiary: #262626;
+}

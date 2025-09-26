@@ -1,0 +1,15 @@
+/* Workspace Selector Component Styles */
+.workspace-selector .ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease;
+}
+
+.workspace-selector .ant-select-selector:hover {
+  border: 1px solid var(--border-primary) !important;
+}
+
+.workspace-selector .ant-select-selector:focus {
+  border: 1px solid var(--color-info) !important;
+  box-shadow: var(--shadow-focus) !important;
+}

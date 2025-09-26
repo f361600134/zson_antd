@@ -1,0 +1,15 @@
+/* Admin Dropdown Component Styles */
+.admin-dropdown-trigger {
+  padding: var(--spacing-sm);
+  border-radius: var(--spacing-sm);
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.admin-dropdown-trigger:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .admin-dropdown-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}

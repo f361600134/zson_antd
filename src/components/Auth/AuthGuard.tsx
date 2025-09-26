@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuthStore } from '../../store/authStore';
-import LoginPage from './LoginPage';
+import {LoginPage} from "../../pages";
 
 interface AuthGuardProps {
   children: React.ReactNode;

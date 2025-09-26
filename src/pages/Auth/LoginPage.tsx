@@ -53,9 +53,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: themeConfig.themeMode === 'dark' 
-      ? 'linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%)'
-      : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: themeConfig.themeMode === 'dark' ? '#1f1f1f' : '#ffffff',
     padding: '20px'
   };
 

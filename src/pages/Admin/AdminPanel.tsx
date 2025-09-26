@@ -18,7 +18,6 @@ import {
   message,
   Tabs,
   Switch,
-  DatePicker,
   Progress
 } from 'antd';
 import { 
@@ -33,11 +32,10 @@ import {
   SecurityScanOutlined,
   BugOutlined
 } from '@ant-design/icons';
-import { useThemeStore } from '../../store/themeStore';
 import { useRoleCheck } from '../../hooks';
 import type { ColumnsType } from 'antd/es/table';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 const { TabPane } = Tabs;
 
 interface User {
@@ -59,7 +57,6 @@ interface SystemLog {
 }
 
 const AdminPanel: React.FC = () => {
-  const { themeConfig } = useThemeStore();
   const { hasRequiredAccess } = useRoleCheck(['admin', 'superadmin']);
   const [activeTab, setActiveTab] = useState('users');
   const [userModalVisible, setUserModalVisible] = useState(false);
@@ -257,7 +254,7 @@ const AdminPanel: React.FC = () => {
     message.success(`User ${userId} deleted successfully`);
   };
 
-  const handleUserSubmit = (values: any) => {
+  const handleUserSubmit = (values: never) => {
     if (editingUser) {
       message.success('User updated successfully');
     } else {

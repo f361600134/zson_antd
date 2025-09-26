@@ -1,0 +1,22 @@
+/* Theme Preview Component Styles */
+.theme-preview-box {
+  width: 88px;
+  height: 52px;
+  border-radius: 6px;
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-preview-box:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.theme-preview-box.selected {
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--color-info);
+}

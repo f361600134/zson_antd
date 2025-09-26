@@ -1,0 +1,100 @@
+/* Compact Theme Styles */
+
+/* Dashboard Cards */
+.dashboard-card.compact {
+  background: linear-gradient(135deg, var(--compact-bg-primary) 0%, var(--compact-bg-secondary) 100%);
+  border: 1px solid var(--compact-border);
+  box-shadow: var(--shadow-compact);
+  position: relative;
+}
+
+.dashboard-card.compact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--compact-primary) 0%, var(--compact-secondary) 50%, var(--compact-border) 100%);
+  border-radius: 6px 6px 0 0;
+}
+
+/* Table Styles */
+.dashboard-table.compact .ant-table-thead > tr > th {
+  background: linear-gradient(135deg, #f6ffed 0%, #d9f7be 100%);
+  border-bottom: 2px solid #b7eb8f;
+}
+
+.dashboard-table.compact .ant-table-tbody > tr:hover > td {
+  background: #f6ffed !important;
+}
+
+/* Sidebar Menu */
+.compact .ant-menu-item-selected {
+  background: linear-gradient(90deg, var(--compact-bg-secondary) 0%, #F1F3F4 100%) !important;
+  border-right: 3px solid var(--compact-primary) !important;
+}
+
+/* Background Pattern */
+.compact-bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(27, 77, 62, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(156, 163, 175, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(241, 243, 244, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Elements */
+.compact-floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-book {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  font-size: 32px;
+  opacity: 0.15;
+  color: var(--compact-primary);
+  animation: float-knowledge 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.floating-lightbulb {
+  position: absolute;
+  top: 60%;
+  right: 5%;
+  font-size: 28px;
+  opacity: 0.12;
+  color: var(--compact-secondary);
+  animation: float-knowledge 8s ease-in-out infinite reverse;
+  z-index: 1;
+}
+
+.floating-tree {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  font-size: 36px;
+  opacity: 0.1;
+  color: var(--compact-primary);
+  animation: float-knowledge 10s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes float-knowledge {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}

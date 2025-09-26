@@ -1,19 +1,16 @@
 import React from 'react';
-import { 
-  FileTextOutlined,
-  BarChartOutlined,
-  FilePptOutlined
-} from '@ant-design/icons';
 import type { NavigationPage } from '../types';
 
-// 组件懒加载导入
-const Dashboard = React.lazy(() => import('../components/Dashboard/Dashboard'));
-const SystemSettings = React.lazy(() => import('../components/Settings/SystemSettings'));
-const PersonalProfile = React.lazy(() => import('../components/Profile/PersonalProfile'));
-const AdminPanel = React.lazy(() => import('../components/Admin/AdminPanel'));
-const TeamManagement = React.lazy(() => import('../components/Team/TeamManagement'));
-const Placeholder = React.lazy(() => import('../components/Common/Placeholder'));
-const Spreadsheet = React.lazy(() => import('../components/Spreadsheet/Spreadsheet'));
+// 组件懒加载导入 - 使用新的 pages 结构
+const Dashboard = React.lazy(() => import('../pages/Dashboard'));
+const SystemSettings = React.lazy(() => import('../pages/Settings'));
+const PersonalProfile = React.lazy(() => import('../pages/Profile'));
+const AdminPanel = React.lazy(() => import('../pages/Admin'));
+const TeamManagement = React.lazy(() => import('../pages/Team'));
+const Spreadsheet = React.lazy(() => import('../pages/Spreadsheet'));
+const Documents = React.lazy(() => import('../pages/Documents'));
+const Analytics = React.lazy(() => import('../pages/Analytics'));
+const Protocol = React.lazy(() => import('../pages/Protocol'));
 
 // 页面配置接口
 export interface PageConfig {
@@ -42,11 +39,11 @@ export interface PageConfig {
 //     />
 //   ));
 // };
-const createPlaceholder = (props: React.ComponentProps<typeof Placeholder> ) => {
-  const comp : React.FC =() => <Placeholder {...props}/>;
-  comp.displayName = 'Placeholder(${props.title})';
-  return comp;
-}
+// const createPlaceholder = (props: React.ComponentProps<typeof Placeholder> ) => {
+//   const comp : React.FC =() => <Placeholder {...props}/>;
+//   comp.displayName = 'Placeholder(${props.title})';
+//   return comp;
+// }
 
 // 页面配置注册表
 export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
@@ -113,13 +110,7 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
   
   documents: {
     key: 'documents',
-    component: createPlaceholder(
-        {
-          icon: <FileTextOutlined />,
-          title: 'Documents Page',
-          text:'This page is under development'
-        }
-    ),
+    component: Documents,
     title: '文档管理',
     description: '文档存储和管理系统',
     requiresAuth: true,
@@ -131,13 +122,7 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
   
   analytics: {
     key: 'analytics',
-    component: createPlaceholder(
-        {
-          icon: <BarChartOutlined />,
-          title: 'Analytics Page',
-          text:'This page is under development'
-        }
-    ),
+    component: Analytics,
     title: '数据分析',
     description: '业务数据分析和报表',
     requiresAuth: true,
@@ -162,13 +147,7 @@ export const PAGE_REGISTRY: Record<NavigationPage, PageConfig> = {
 
   protocol: {
     key: 'protocol',
-    component: createPlaceholder(
-      {
-        icon: <FilePptOutlined />,
-        title: 'Protocol Page',
-        text:'This page is under development'
-      }
-    ),
+    component: Protocol,
     title: '协议管理',
     description: '协议文档和演示文稿管理',
     requiresAuth: true,

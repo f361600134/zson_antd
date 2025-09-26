@@ -1,0 +1,29 @@
+/* CSS Variables - Spacing System */
+:root {
+  /* Base Spacing Units */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-xxxl: 64px;
+  
+  /* Component Specific Spacing */
+  --card-padding: var(--spacing-lg);
+  --section-padding: var(--spacing-xl);
+  --page-padding: var(--spacing-lg);
+  
+  /* Layout Spacing */
+  --header-height: 64px;
+  --sidebar-width: 256px;
+  --sidebar-collapsed-width: 80px;
+  
+  /* Grid Spacing */
+  --grid-gutter: var(--spacing-lg);
+  --grid-gutter-sm: var(--spacing-md);
+  
+  /* Form Spacing */
+  --form-item-margin: var(--spacing-md);
+  --form-vertical-spacing: var(--spacing-lg);
+}
