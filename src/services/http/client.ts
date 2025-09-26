@@ -1,9 +1,10 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError  } from 'axios';
 import type { InternalAxiosRequestConfig } from 'axios';
 
+
 // API 基础配置
 const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://10.19.216.210:5050/zson',
+  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:5050/zson',
   TIMEOUT: 10000, // 10秒超时
   RETRY_ATTEMPTS: 3,
   RETRY_DELAY: 1000, // 1秒重试间隔
