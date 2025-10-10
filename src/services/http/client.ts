@@ -76,10 +76,10 @@ class HttpClient {
     const customConfig = config as RequestConfig;
 
     if (token && !customConfig.skipAuth) {
-    //   config.headers = {
-    //     ...config.headers,
-    //     Authorization: `Bearer ${token}`,
-    //   };
+      // config.headers = {
+      //   ...config.headers,
+      //   Authorization: `Bearer ${token}`,
+      // };
     if (config.headers) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

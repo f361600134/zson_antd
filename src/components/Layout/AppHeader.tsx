@@ -58,7 +58,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
       icon: <LoginOutlined />,
       onClick: () => {
         logout();
-        window.location.reload(); // 刷新页面回到登录状态
+        //window.location.reload(); // 刷新页面回到登录状态
       },
       danger: true
     }

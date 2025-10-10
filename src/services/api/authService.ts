@@ -67,6 +67,8 @@ export const authService = {
   async logout(): Promise<void> {
     try {
       await httpClient.post(`${baseUrl}/logout`);
+    }  catch (e) {
+      console.warn('Logout API failed:', e);
     } finally {
       clearAuthData();
     }

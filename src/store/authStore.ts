@@ -1,31 +1,7 @@
 import { create, StateCreator } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import authService from "../services/api/authService.ts";
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-  roles: string[];
-}
-
-export interface LoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface AuthState {
-  user: User | null;
-  token: string | null;
-  refreshToken: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (credentials: LoginCredentials) => Promise<void>;
-  logout: () => Promise<void>;
-  checkAuth: () => boolean;
-  setLoading: (loading: boolean) => void;
-}
+import {AuthState, LoginCredentials} from "../dtos/user.ts";
 
 const authStoreCreator: StateCreator<AuthState> = (set, get) => ({
   user: null,
@@ -40,10 +16,16 @@ const authStoreCreator: StateCreator<AuthState> = (set, get) => ({
       const res = await authService.login(credentials);
       set({
         // user: res.user,
+        // user: {
+        //   id: '1',
+        //   name: 'Admin User',
+        //   email: 'admin@company.com',
+        //   roles: ['admin', 'user']
+        // },
         user: {
-          id: '1',
-          name: 'Admin User',
-          email: 'admin@company.com',
+          id: res.userDto.id,
+          name: res.userDto.name,
+          email: res.userDto.email,
           roles: ['admin', 'user']
         },
         token: res.accessToken,

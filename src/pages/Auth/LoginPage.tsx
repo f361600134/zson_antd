@@ -19,7 +19,7 @@ import {
 } from '@ant-design/icons';
 import { useAuthStore } from '../../store/authStore';
 import { useThemeStyles } from '../../hooks';
-import type { LoginCredentials } from '../../store/authStore';
+import {LoginCredentials} from "../../dtos/user.ts";
 
 const { Title, Text } = Typography;
 
